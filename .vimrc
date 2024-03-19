@@ -390,6 +390,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' 
 " <leader>cu 取消注释
 Plug 'preservim/nerdcommenter'
 
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 Plug 'voldikss/vim-floaterm'
 
