@@ -70,7 +70,7 @@ ZSH_THEME="fletcherm"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions golang jump docker kubectl zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions golang jump docker kubectl zsh-syntax-highlighting autojump)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -100,11 +100,12 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vif='vi $(fzf)'
+alias f='open "$(fzf)"'
 alias gm="git merge --no-ff"
 alias zte="trans :en"
 alias etz="trans :zh"
 alias got="go mod tidy"
-alias j="jump"
+alias ju="jump"
 alias python="python3"
 
 alias viu="vim -u ~/.vim/essential.vim"
@@ -114,7 +115,6 @@ alias phpstan='docker run -v $PWD:/app --rm ghcr.io/phpstan/phpstan'
 alias asciicast2gif='docker run --rm -v $PWD:/data asciinema/asciicast2gif'
 
 alias yt='yt-dlp -f "bv+ba/best" --merge-output-format mp4   --proxy socks5://127.0.0.1:1081'
-alias vi='nvim'
 
 export PATH="/usr/local/opt/php@7.3/bin:$PATH"
 export PATH="/usr/local/opt/php@7.3/sbin:$PATH"
@@ -151,5 +151,35 @@ export NVM_DIR="$HOME/.nvm"
 DISABLE_MAGIC_FUNCTIONS=true
 fpath=(~/.zsh.d/ $fpath)
 export PATH="/usr/local/opt/curl/bin:$PATH"
-#export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
+#export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890
+export PATH="/usr/local/opt/zookeeper/bin:$PATH"
+
+
+source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+alias cdd='cd $HOME && cd "$(fd -t d | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)"'
+alias owf="fzf --preview='head -$LINES {}'"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/wscrlhs/radioconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/wscrlhs/radioconda/etc/profile.d/conda.sh" ]; then
+        . "/Users/wscrlhs/radioconda/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/wscrlhs/radioconda/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+export PATH="/usr/local/opt/llvm/bin:$PATH"
+export XDG_CONFIG_HOME="$HOME/.config"
+alias lg="lazygit"
+alias yt="yt-dlp -f "bv+ba/best" --merge-output-format mp4   --proxy socks5://127.0.0.1:7890"
+alias vds="cralwer search --config /Users/wscrlhs/bin --name "
+
+eval $(thefuck --alias)
