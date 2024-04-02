@@ -300,6 +300,8 @@ Plug 'chr4/nginx.vim'
 Plug 'kshenoy/vim-signature'
 Plug 'morhetz/gruvbox'
 
+Plug 'christoomey/vim-tmux-navigator'
+
 " map <C-e> <plug>NERDTreeTabsToggle<CR>
 " map <leader>e :NERDTreeFind<CR>
 " nmap <leader>nt :NERDTreeFind<CR>

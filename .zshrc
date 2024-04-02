@@ -183,3 +183,4 @@ alias yt="yt-dlp -f "bv+ba/best" --merge-output-format mp4   --proxy socks5://12
 alias vds="cralwer search --config /Users/wscrlhs/bin --name "
 
 eval $(thefuck --alias)
+eval "$(zoxide init zsh)"
