@@ -68,7 +68,7 @@ set ruler
 " 开启行号显示
 set number
 " 相对展示行号
-"set relativenumber
+set relativenumber
 
 " 高亮显示当前行/列
 set cursorline
@@ -301,6 +301,7 @@ Plug 'kshenoy/vim-signature'
 Plug 'morhetz/gruvbox'
 
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'preservim/vimux'
 
 " map <C-e> <plug>NERDTreeTabsToggle<CR>
 " map <leader>e :NERDTreeFind<CR>
@@ -311,6 +312,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " nnoremap <silent> <C-p> :CtrlP<CR>
 " nnoremap <silent> <C-m> :CtrlPMRU<CR>
 " nnoremap <silent> <C-b> :CtrlPBuffer<CR>
+" nnoremap <silent> <C-m> :CtrlPMixed<CR>
 Plug 'ctrlpvim/ctrlp.vim'
 
 " nnoremap <Leader>fu :CtrlPFunky<Cr>
@@ -499,8 +501,9 @@ endif
 if isdirectory(expand("~/.vim/plugged/ctrlp.vim/"))
     let g:ctrlp_working_path_mode = 'ra'
     nnoremap <silent> <C-p> :CtrlP<CR>
-    nnoremap <silent> <C-m> :CtrlPMRU<CR>
+    "nnoremap <silent> <C-m> :CtrlPMRU<CR>
     nnoremap <silent> <C-b> :CtrlPBuffer<CR>
+    nnoremap <silent> <C-m> :CtrlPMixed<CR>
     let g:ctrlp_custom_ignore = {
                 \ 'dir':  '\.git$\|\.hg$\|\.svn$',
                 \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
@@ -880,6 +883,33 @@ endif
     let g:floaterm_width = 0.95
     let g:floaterm_height = 0.95
     noremap <leader>lg :FloatermNew lazygit<CR>
+
+
+"-------------------------------------------------------------------------------
+" vimux
+"-------------------------------------------------------------------------------
+    map <Leader>gt :call VimuxRunCommand("go test -run " .go#util#TestName()." -v")<CR>
+
+    " Prompt for a command to run
+    map <Leader>vp :VimuxPromptCommand<CR>
+
+    " Run last command executed by VimuxRunCommand
+    map <Leader>vl :VimuxRunLastCommand<CR>
+
+    " Inspect runner pane
+    map <Leader>vi :VimuxInspectRunner<CR>
+
+    " Close vim tmux runner opened by VimuxRunCommand
+    map <Leader>vq :VimuxCloseRunner<CR>
+
+    " Interrupt any command running in the runner pane
+    map <Leader>vx :VimuxInterruptRunner<CR>
+
+    " Zoom the runner pane (use <bind-key> z to restore runner pane)
+    map <Leader>vz :call VimuxZoomRunner()<CR>
+
+    " Clear the terminal screen of the runner pane.
+    map <Leader>v<C-l> :VimuxClearTerminalScreen<CR>
 
 
 "-------------------------------------------------------------------------------
