@@ -99,8 +99,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vif='vi $(fzf)'
-alias f='open "$(fzf)"'
 alias gm="git merge --no-ff"
 alias zte="trans :en"
 alias etz="trans :zh"
@@ -159,7 +157,6 @@ export PATH="/usr/local/opt/zookeeper/bin:$PATH"
 source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 alias cdd='cd $HOME && cd "$(fd -t d | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)"'
-alias owf="fzf --preview='head -$LINES {}'"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
