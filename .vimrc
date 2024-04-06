@@ -501,9 +501,9 @@ endif
 if isdirectory(expand("~/.vim/plugged/ctrlp.vim/"))
     let g:ctrlp_working_path_mode = 'ra'
     nnoremap <silent> <C-p> :CtrlP<CR>
-    "nnoremap <silent> <C-m> :CtrlPMRU<CR>
+    nnoremap <silent> <C-m> :CtrlPMRU<CR>
     nnoremap <silent> <C-b> :CtrlPBuffer<CR>
-    nnoremap <silent> <C-m> :CtrlPMixed<CR>
+    "nnoremap <silent> <C-m> :CtrlPMixed<CR>
     let g:ctrlp_custom_ignore = {
                 \ 'dir':  '\.git$\|\.hg$\|\.svn$',
                 \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
@@ -889,6 +889,8 @@ endif
 " vimux
 "-------------------------------------------------------------------------------
     map <Leader>gt :call VimuxRunCommand("go test -run " .go#util#TestName()." -v")<CR>
+
+    let g:VimuxOrientation = "h"
 
     " Prompt for a command to run
     map <Leader>vp :VimuxPromptCommand<CR>
