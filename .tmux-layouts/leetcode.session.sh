@@ -9,6 +9,10 @@ if initialize_session "leetcode"; then
   # Create a new window inline within session layout definition.
   new_window "leetcode"
 
+  split_h 20
+
+  select_pane 0
+
   # Load a defined window layout.
   load_window "leet-go"
 
