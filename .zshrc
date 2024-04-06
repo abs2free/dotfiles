@@ -153,6 +153,11 @@ export PATH="/usr/local/opt/ruby/bin:$PATH"
 #export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890
 export PATH="/usr/local/opt/zookeeper/bin:$PATH"
 
+export PATH="$HOME/.tmux/plugins/tmuxifier/bin:$PATH"
+export TMUXIFIER_LAYOUT_PATH="$HOME/.tmux-layouts"
+export EDITOR=vim
+alias tm="tmuxifier"
+
 
 source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 
