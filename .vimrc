@@ -402,6 +402,11 @@ Plug 'voldikss/vim-floaterm'
 "Plug 'vimwiki/vimwiki'
 "Plug 'itchyny/calendar.vim'
 
+Plug 'airblade/vim-rooter'
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
 " 插件列表结束
 call plug#end()
 
@@ -690,9 +695,10 @@ if isdirectory(expand("~/.vim/plugged/LeaderF/"))
     let g:Lf_PreviewInPopup = 1
     let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2", 'font': "DejaVu Sans Mono for Powerline" }
     let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
+    let g:Lf_CommandMap = {'<C-K>': ['<Up>'], '<C-J>': ['<Down>']}
 
 
-     "let g:Lf_ShortcutF = "<leader>ff"
+     let g:Lf_ShortcutF = "<leader>ff"
      nnoremap <silent> <Leader>rg :Leaderf rg<CR>
      nnoremap <silent> <Leader>mru :Leaderf mru<CR>
      noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
@@ -912,6 +918,64 @@ endif
 
     " Clear the terminal screen of the runner pane.
     map <Leader>v<C-l> :VimuxClearTerminalScreen<CR>
+
+"-------------------------------------------------------------------------------
+" fzf
+"-------------------------------------------------------------------------------
+    map <leader>f :Files<CR>
+    nnoremap <leader>g :Rg<CR>
+    nnoremap <leader>tg :Tags<CR>
+    nnoremap <leader>m :Marks<CR>
+
+
+
+    " This is the default extra key bindings
+    let g:fzf_action = {
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit' }
+
+    " An action can be a reference to a function that processes selected lines
+    function! s:build_quickfix_list(lines)
+      call setqflist(map(copy(a:lines), '{ "filename": v:val, "lnum": 1 }'))
+      copen
+      cc
+    endfunction
+
+    let g:fzf_action = {
+      \ 'ctrl-q': function('s:build_quickfix_list'),
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit' }
+
+    " Default fzf layout
+    " - Popup window (center of the current window)
+    let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'relative': v:true } }
+
+
+    " Customize fzf colors to match your color scheme
+    " - fzf#wrap translates this to a set of `--color` options
+    let g:fzf_colors =
+    \ { 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Comment'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'border':  ['fg', 'Ignore'],
+      \ 'prompt':  ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker':  ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment'] }
+
+    " Enable per-command history
+    " - History files will be stored in the specified directory
+    " - When set, CTRL-N and CTRL-P will be bound to 'next-history' and
+    "   'previous-history' instead of 'down' and 'up'.
+    let g:fzf_history_dir = '~/.local/share/fzf-history'
+
 
 
 "-------------------------------------------------------------------------------
