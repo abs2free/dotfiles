@@ -9,7 +9,7 @@ if initialize_session "leetcode"; then
   # Create a new window inline within session layout definition.
   new_window "leetcode"
 
-  split_h 20
+  split_h 10
 
   select_pane 0
 
