@@ -1,3 +1,4 @@
+cd ~
 ln -s ~/abs2free/dotfiles/.zshrc
 
 ln -s ~/abs2free/dotfiles/.bashrc
