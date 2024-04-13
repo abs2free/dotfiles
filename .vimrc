@@ -705,23 +705,12 @@ endif
 " fzf
 "-------------------------------------------------------------------------------
     nnoremap <leader>f :Files<CR>
-    nnoremap <leader>rg :Rg<CR>
+    nnoremap <silent> <Leader>ag :Ag <CR>
+    nnoremap <leader>rg :Rg <cr>
     nnoremap <leader>tg :Tags<CR>
     nnoremap <leader>m :Marks<CR>
     nnoremap <leader>b :Buffers<CR>
-    nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
-
-    function! FzfTagsCurrentWord()
-      let l:word = expand('<cword>')
-      let l:list = taglist(l:word)
-      if len(l:list) == 1
-        execute ':tag ' . l:word
-      else
-        call fzf#vim#tags(l:word)
-      endif
-    endfunction
-
-    noremap <c-]> :call FzfTagsCurrentWord()<cr>
+    nnoremap <leader>h :History
 
     " An action can be a reference to a function that processes selected lines
     function! s:build_quickfix_list(lines)
@@ -764,6 +753,26 @@ endif
     "   'previous-history' instead of 'down' and 'up'.
     let g:fzf_history_dir = '~/.local/share/fzf-history'
 
+    " [Buffers] Jump to the existing window if possible
+    let g:fzf_buffers_jump = 1
+    " [[B]Commits] Customize the options used by 'git log':
+    let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+    " [Tags] Command to generate tags file
+    let g:fzf_tags_command = 'ctags -R'
+    " [Commands] --expect expression for directly executing the command
+    let g:fzf_commands_expect = 'alt-enter,ctrl-x'
+
+
+    " Custom statusline
+    function! s:fzf_statusline()
+    " Override statusline as you like
+    highlight fzf1 ctermfg=161 ctermbg=251
+    highlight fzf2 ctermfg=23 ctermbg=251
+    highlight fzf3 ctermfg=237 ctermbg=251
+    setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+    endfunction
+
+    autocmd! User FzfStatusLine call fzf_statusline()
 
 
 "-------------------------------------------------------------------------------
