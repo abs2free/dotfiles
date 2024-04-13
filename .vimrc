@@ -307,7 +307,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 Plug 'ctrlpvim/ctrlp.vim'
-
 Plug 'tacahiroy/ctrlp-funky'
 
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
@@ -789,9 +788,9 @@ endif
     let g:go_metalinter_autosave = 0
     let g:go_metalinter_command = "golangci-lint"
     let g:go_metalinter_autosave_enabled = ['vet', 'staticcheck', 'gosimple']
-    let g:go_metalinter_deadline = "5s"
+    "let g:go_metalinter_deadline = "5s"
     let g:go_fmt_experimental = 1
-    
+
     " highlight same variable in view
     let g:go_auto_sameids = 1
     let g:go_list_type = "quickfix"
@@ -808,6 +807,11 @@ endif
     noremap <leader>gf :GoFmt<CR> 
     noremap <leader>gl :GoMetaLinter<CR>
 
+    " In the quickfix window, <CR> is used to jump to the error under the
+    " cursor, so undefine the mapping there.
+    autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+    " quickfix window 正下方位置
+    autocmd FileType qf wincmd J
 
 
 "-------------------------------------------------------------------------------
