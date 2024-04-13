@@ -692,7 +692,7 @@ if isdirectory(expand("~/.vim/plugged/LeaderF/"))
      noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
      noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
 
-     noremap <C-B> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
+     noremap<C-B> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
      noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
 
      " search visually selected text literally
@@ -709,6 +709,19 @@ endif
     nnoremap <leader>tg :Tags<CR>
     nnoremap <leader>m :Marks<CR>
     nnoremap <leader>b :Buffers<CR>
+    nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
+
+    function! FzfTagsCurrentWord()
+      let l:word = expand('<cword>')
+      let l:list = taglist(l:word)
+      if len(l:list) == 1
+        execute ':tag ' . l:word
+      else
+        call fzf#vim#tags(l:word)
+      endif
+    endfunction
+
+    noremap <c-]> :call FzfTagsCurrentWord()<cr>
 
     " An action can be a reference to a function that processes selected lines
     function! s:build_quickfix_list(lines)
