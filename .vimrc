@@ -303,59 +303,23 @@ Plug 'morhetz/gruvbox'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'preservim/vimux'
 
-" map <C-e> <plug>NERDTreeTabsToggle<CR>
-" map <leader>e :NERDTreeFind<CR>
-" nmap <leader>nt :NERDTreeFind<CR>
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-" nnoremap <silent> <C-p> :CtrlP<CR>
-" nnoremap <silent> <C-m> :CtrlPMRU<CR>
-" nnoremap <silent> <C-b> :CtrlPBuffer<CR>
-" nnoremap <silent> <C-m> :CtrlPMixed<CR>
 Plug 'ctrlpvim/ctrlp.vim'
 
-" nnoremap <Leader>fu :CtrlPFunky<Cr>
-" narrow the list down with a word under cursor
-" nnoremap <Leader>uu :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 Plug 'tacahiroy/ctrlp-funky'
 
-" nnoremap <silent> <Leader>rg :Leaderf rg<CR>
-" nnoremap <silent> <Leader>mru :Leaderf mru<CR>
-" noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
-" noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
-" noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
-" noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
-" search visually selected text literally
-" xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
-" noremap go :<C-U>Leaderf! rg --recall<CR>
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 
-" zr: reduces fold level throughout the buffer
-" zR: opens all folds
-" zm: increases fold level throughout the buffer
-" zM: folds everything all the way
-" za: open a fold your cursor is on
-" zA: open a fold your cursor is on recursively
-" zc: close a fold your cursor is on
-" zC: close a fold your cursor is on recursively
 Plug 'plasticboy/vim-markdown'
 
-" Fugitive Conflict Resolution
-" nnoremap <leader>gd :Gvdiff!<CR>
 Plug 'tpope/vim-fugitive'
 
-" map <Leader><leader>h <Plug>(easymotion-linebackward)
-" map <Leader><Leader>j <Plug>(easymotion-j)
-" map <Leader><Leader>k <Plug>(easymotion-k)
-" map <Leader><leader>l <Plug>(easymotion-lineforward)
-" 重复上一次操作, 类似repeat插件, 很强大
-" map <Leader><leader>. <Plug>(easymotion-repeat)
 Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
 
-" nnoremap <Leader>u :UndotreeToggle<CR>
 Plug 'mbbill/undotree'
 
 
@@ -364,20 +328,13 @@ Plug 'vim-autoformat/vim-autoformat'
 " 这个插件需要私人定制 https://keelii.com/2018/08/26/vim-plugin-ultisnips-advanced-tips/
 "Plug 'SirVer/ultisnips'
 
-" let g:UltiSnipsExpandTrigger="<leader><tab>"
-" let g:UltiSnipsJumpForwardTrigger="<c-b>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 Plug 'honza/vim-snippets'
 "Plug 'wscrlhs/vim-snippets'
 
 Plug 'tpope/vim-surround'
 
-" nmap <Leader>gm <Plug>(git-messenger)
 Plug 'rhysd/git-messenger.vim'
 
-" nmap <C-s> <Plug>MarkdownPreview
-" nmap <M-s> <Plug>MarkdownPreviewStop
-" nmap <C-p> <Plug>MarkdownPreviewToggle
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 
 " <leader>cc 注释当前行和选中行
@@ -499,31 +456,15 @@ if isdirectory(expand("~/.vim/plugged/nerdtree/"))
     call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 endif
 
-
 "-------------------------------------------------------------------------------
-" Ctrlp 
+" TagBar 
 "-------------------------------------------------------------------------------
-if isdirectory(expand("~/.vim/plugged/ctrlp.vim/"))
-    let g:ctrlp_working_path_mode = 'ra'
-    nnoremap <silent> <C-p> :CtrlP<CR>
-    nnoremap <silent> <C-m> :CtrlPMRU<CR>
-    nnoremap <silent> <C-b> :CtrlPBuffer<CR>
-    "nnoremap <silent> <C-m> :CtrlPMixed<CR>
-    let g:ctrlp_custom_ignore = {
-                \ 'dir':  '\.git$\|\.hg$\|\.svn$',
-                \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
+    if isdirectory(expand("~/.vim/plugged/tagbar/"))
+        nnoremap <silent> <leader>tt :TagbarToggle<CR>
 
-    " CtrlP extensions
-    let g:ctrlp_extensions = ['funky']
+    autocmd VimEnter * nested :TagbarOpen
+    endif
 
-    "ctrlp-funky
-    nnoremap <Leader>fu :CtrlPFunky<Cr>
-    " narrow the list down with a word under cursor
-    nnoremap <Leader>uu :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
-    " f you want to have this highlight feature
-    let g:ctrlp_funky_matchtype = 'path'
-    let g:ctrlp_funky_syntax_highlight = 1
-endif
 
 
 "-------------------------------------------------------------------------------
@@ -680,6 +621,31 @@ if isdirectory(expand("~/.vim/plugged/undotree/"))
 
 endif
 
+"-------------------------------------------------------------------------------
+" Ctrlp 
+"-------------------------------------------------------------------------------
+if isdirectory(expand("~/.vim/plugged/ctrlp.vim/"))
+    let g:ctrlp_working_path_mode = 'ra'
+    nnoremap <silent> <C-p> :CtrlP<CR>
+    nnoremap <silent> <C-m> :CtrlPMRU<CR>
+    nnoremap <silent> <C-b> :CtrlPBuffer<CR>
+    "nnoremap <silent> <C-m> :CtrlPMixed<CR>
+    let g:ctrlp_custom_ignore = {
+                \ 'dir':  '\.git$\|\.hg$\|\.svn$',
+                \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
+
+    " CtrlP extensions
+    let g:ctrlp_extensions = ['funky']
+
+    "ctrlp-funky
+    nnoremap <Leader>fu :CtrlPFunky<Cr>
+    " narrow the list down with a word under cursor
+    nnoremap <Leader>uu :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+    " f you want to have this highlight feature
+    let g:ctrlp_funky_matchtype = 'path'
+    let g:ctrlp_funky_syntax_highlight = 1
+endif
+
 
 "-------------------------------------------------------------------------------
 " LeaderF
@@ -711,6 +677,65 @@ if isdirectory(expand("~/.vim/plugged/LeaderF/"))
      noremap go :<C-U>Leaderf! rg --recall<CR>
 
 endif
+
+"-------------------------------------------------------------------------------
+" fzf
+"-------------------------------------------------------------------------------
+    map <leader>f :Files<CR>
+    nnoremap <leader>g :Rg<CR>
+    nnoremap <leader>tg :Tags<CR>
+    nnoremap <leader>m :Marks<CR>
+    nnoremap <leader>b :Buffers<CR>
+
+
+    " This is the default extra key bindings
+    let g:fzf_action = {
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit' }
+
+    " An action can be a reference to a function that processes selected lines
+    function! s:build_quickfix_list(lines)
+      call setqflist(map(copy(a:lines), '{ "filename": v:val, "lnum": 1 }'))
+      copen
+      cc
+    endfunction
+
+    let g:fzf_action = {
+      \ 'ctrl-q': function('s:build_quickfix_list'),
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit' }
+
+    " Default fzf layout
+    " - Popup window (center of the current window)
+    let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'relative': v:true } }
+
+
+    " Customize fzf colors to match your color scheme
+    " - fzf#wrap translates this to a set of `--color` options
+    let g:fzf_colors =
+    \ { 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Comment'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'border':  ['fg', 'Ignore'],
+      \ 'prompt':  ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker':  ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment'] }
+
+    " Enable per-command history
+    " - History files will be stored in the specified directory
+    " - When set, CTRL-N and CTRL-P will be bound to 'next-history' and
+    "   'previous-history' instead of 'down' and 'up'.
+    let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+
 
 "-------------------------------------------------------------------------------
 " Vim-Go 
@@ -783,13 +808,6 @@ endif
     noremap <leader>gf :GoFmt<CR> 
     noremap <leader>gml :GoMetaLinter<CR>
 
-
-"-------------------------------------------------------------------------------
-" TagBar 
-"-------------------------------------------------------------------------------
-    if isdirectory(expand("~/.vim/plugged/tagbar/"))
-        nnoremap <silent> <leader>tt :TagbarToggle<CR>
-    endif
 
 
 "-------------------------------------------------------------------------------
@@ -918,63 +936,6 @@ endif
 
     " Clear the terminal screen of the runner pane.
     map <Leader>v<C-l> :VimuxClearTerminalScreen<CR>
-
-"-------------------------------------------------------------------------------
-" fzf
-"-------------------------------------------------------------------------------
-    map <leader>f :Files<CR>
-    nnoremap <leader>g :Rg<CR>
-    nnoremap <leader>tg :Tags<CR>
-    nnoremap <leader>m :Marks<CR>
-
-
-
-    " This is the default extra key bindings
-    let g:fzf_action = {
-      \ 'ctrl-t': 'tab split',
-      \ 'ctrl-x': 'split',
-      \ 'ctrl-v': 'vsplit' }
-
-    " An action can be a reference to a function that processes selected lines
-    function! s:build_quickfix_list(lines)
-      call setqflist(map(copy(a:lines), '{ "filename": v:val, "lnum": 1 }'))
-      copen
-      cc
-    endfunction
-
-    let g:fzf_action = {
-      \ 'ctrl-q': function('s:build_quickfix_list'),
-      \ 'ctrl-t': 'tab split',
-      \ 'ctrl-x': 'split',
-      \ 'ctrl-v': 'vsplit' }
-
-    " Default fzf layout
-    " - Popup window (center of the current window)
-    let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'relative': v:true } }
-
-
-    " Customize fzf colors to match your color scheme
-    " - fzf#wrap translates this to a set of `--color` options
-    let g:fzf_colors =
-    \ { 'fg':      ['fg', 'Normal'],
-      \ 'bg':      ['bg', 'Normal'],
-      \ 'hl':      ['fg', 'Comment'],
-      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-      \ 'hl+':     ['fg', 'Statement'],
-      \ 'info':    ['fg', 'PreProc'],
-      \ 'border':  ['fg', 'Ignore'],
-      \ 'prompt':  ['fg', 'Conditional'],
-      \ 'pointer': ['fg', 'Exception'],
-      \ 'marker':  ['fg', 'Keyword'],
-      \ 'spinner': ['fg', 'Label'],
-      \ 'header':  ['fg', 'Comment'] }
-
-    " Enable per-command history
-    " - History files will be stored in the specified directory
-    " - When set, CTRL-N and CTRL-P will be bound to 'next-history' and
-    "   'previous-history' instead of 'down' and 'up'.
-    let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 
 
