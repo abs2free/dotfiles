@@ -786,7 +786,7 @@ endif
     let g:go_auto_type_info = 1
 
     
-    let g:go_metalinter_autosave = 1
+    let g:go_metalinter_autosave = 0
     let g:go_metalinter_command = "golangci-lint"
     let g:go_metalinter_autosave_enabled = ['vet', 'staticcheck', 'gosimple']
     let g:go_metalinter_deadline = "5s"
@@ -804,9 +804,9 @@ endif
     "let g:go_debug=['lsp']
     
     " 我自定义的
-    noremap <leader>gl :GoLint<CR>
+    "noremap <leader>gl :GoLint<CR>
     noremap <leader>gf :GoFmt<CR> 
-    noremap <leader>gml :GoMetaLinter<CR>
+    noremap <leader>gl :GoMetaLinter<CR>
 
 
 
