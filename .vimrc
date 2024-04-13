@@ -306,8 +306,8 @@ Plug 'preservim/vimux'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tacahiroy/ctrlp-funky'
+"Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'tacahiroy/ctrlp-funky'
 
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 
@@ -623,27 +623,27 @@ endif
 "-------------------------------------------------------------------------------
 " Ctrlp 
 "-------------------------------------------------------------------------------
-if isdirectory(expand("~/.vim/plugged/ctrlp.vim/"))
-    let g:ctrlp_working_path_mode = 'ra'
-    nnoremap <silent> <C-p> :CtrlP<CR>
-    nnoremap <silent> <C-m> :CtrlPMRU<CR>
-    nnoremap <silent> <C-b> :CtrlPBuffer<CR>
-    "nnoremap <silent> <C-m> :CtrlPMixed<CR>
-    let g:ctrlp_custom_ignore = {
-                \ 'dir':  '\.git$\|\.hg$\|\.svn$',
-                \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
+"if isdirectory(expand("~/.vim/plugged/ctrlp.vim/"))
+    "let g:ctrlp_working_path_mode = 'ra'
+    "nnoremap <silent> <C-p> :CtrlP<CR>
+    "nnoremap <silent> <C-m> :CtrlPMRU<CR>
+    "nnoremap <silent> <C-b> :CtrlPBuffer<CR>
+    ""nnoremap <silent> <C-m> :CtrlPMixed<CR>
+    "let g:ctrlp_custom_ignore = {
+                "\ 'dir':  '\.git$\|\.hg$\|\.svn$',
+                "\ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
 
-    " CtrlP extensions
-    let g:ctrlp_extensions = ['funky']
+    "" CtrlP extensions
+    "let g:ctrlp_extensions = ['funky']
 
-    "ctrlp-funky
-    nnoremap <Leader>fu :CtrlPFunky<Cr>
-    " narrow the list down with a word under cursor
-    nnoremap <Leader>uu :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
-    " f you want to have this highlight feature
-    let g:ctrlp_funky_matchtype = 'path'
-    let g:ctrlp_funky_syntax_highlight = 1
-endif
+    ""ctrlp-funky
+    "nnoremap <Leader>fu :CtrlPFunky<Cr>
+    "" narrow the list down with a word under cursor
+    "nnoremap <Leader>uu :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+    "" f you want to have this highlight feature
+    "let g:ctrlp_funky_matchtype = 'path'
+    "let g:ctrlp_funky_syntax_highlight = 1
+"endif
 
 
 "-------------------------------------------------------------------------------
@@ -809,7 +809,7 @@ endif
 
     " In the quickfix window, <CR> is used to jump to the error under the
     " cursor, so undefine the mapping there.
-    autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+    "autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
     " quickfix window 正下方位置
     autocmd FileType qf wincmd J
 
