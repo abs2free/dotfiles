@@ -1021,6 +1021,15 @@ endif
 
     command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
+
+    " Use <C-j> for jump to next placeholder, it's default of coc.nvim
+    "let g:coc_snippet_next = '<c-j>'
+    let g:coc_snippet_next = '<TAB>'
+
+    " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+    "let g:coc_snippet_prev = '<c-k>'
+    let g:coc_snippet_prev = '<S-TAB>'
+
     " Use c-j/c-k for trigger completion with characters ahead and navigate.
     inoremap <silent><expr> <C-j>
           \ coc#pum#visible() ? coc#pum#next(1):
