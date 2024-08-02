@@ -1006,6 +1006,7 @@ endif
       \ 'coc-eslint', 
       \ 'coc-prettier', 
       \ 'coc-json', 
+      \ 'coc-go',
       \ ]
     " from readme
     " if hidden is not set, TextEdit might fail.
