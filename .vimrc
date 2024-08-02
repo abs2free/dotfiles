@@ -652,6 +652,7 @@ if isdirectory(expand("~/.vim/plugged/ctrlp.vim/"))
     " f you want to have this highlight feature
     let g:ctrlp_funky_matchtype = 'path'
     let g:ctrlp_funky_syntax_highlight = 1
+    let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 endif
 
 
@@ -1019,17 +1020,27 @@ endif
 
     command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
-    " Use tab for trigger completion with characters ahead and navigate.
-    " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-    inoremap <silent><expr> <TAB>
-          \ pumvisible() ? "\<C-n>" :
-          \ <SID>check_back_space() ? "\<TAB>" :
+    " Use c-j/c-k for trigger completion with characters ahead and navigate.
+    inoremap <silent><expr> <C-j>
+          \ coc#pum#visible() ? coc#pum#next(1):
+          \ CheckBackspace() ? "\<Tab>" :
           \ coc#refresh()
-    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-    function! s:check_back_space() abort
-      let col = col('.') - 1
-      return !col || getline('.')[col - 1]  =~# '\s'
-    endfunction
+    inoremap <expr><C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+    inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#confirm():
+      \ "\<C-y>"
+   
+    "" Use tab for trigger completion with characters ahead and navigate.
+    "" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+    "inoremap <silent><expr> <TAB>
+          "\ pumvisible() ? "\<C-n>" :
+          "\ <SID>check_back_space() ? "\<TAB>" :
+          "\ coc#refresh()
+    "inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+    "function! s:check_back_space() abort
+      "let col = col('.') - 1
+      "return !col || getline('.')[col - 1]  =~# '\s'
+    "endfunction
 
     " Use <c-space> to trigger completion.
     inoremap <silent><expr> <c-space> coc#refresh()
