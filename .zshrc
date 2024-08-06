@@ -186,3 +186,7 @@ alias vds="cralwer search --config /Users/wscrlhs/bin --name "
 
 eval $(thefuck --alias)
 eval "$(zoxide init zsh)"
+
+alias kk="kubectl"
+alias m="minikube"
+alias ff="ffmpeg -hide_banner"
