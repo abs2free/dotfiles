@@ -371,6 +371,8 @@ Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
 "Plug 'jparise/vim-graphql'        " GraphQL syntax
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+Plug '907th/vim-auto-save'
+
 " 插件列表结束
 call plug#end()
 
@@ -1138,6 +1140,18 @@ endif
     nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
     " Resume latest coc list
     nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+
+
+"-------------------------------------------------------------------------------
+" autosave
+"-------------------------------------------------------------------------------
+    " enable AutoSave on Vim startup
+    let g:auto_save = 1  
+    let g:auto_save_events = ["InsertLeave", "TextChanged"]
+    "" do not display the auto-save notification
+    "let g:auto_save_silent = 1  
+
 
 
 "-------------------------------------------------------------------------------
