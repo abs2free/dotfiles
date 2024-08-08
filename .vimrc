@@ -1028,10 +1028,10 @@ endif
     "語法片段如果有設計好的話，一開始會選取 name ，修改完後
     "跳下一個選取 type，然後是 args，預設是 <Ctrl-j> 跳下一個"
     "" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-    ""let g:coc_snippet_next = '<c-j>'
+    let g:coc_snippet_next = '<c-j>'
 
     "" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-    ""let g:coc_snippet_prev = '<c-k>'
+    let g:coc_snippet_prev = '<c-k>'
 
     " Use tab for trigger completion with characters ahead and navigate
     " NOTE: There's always complete item selected by default, you may want to enable
@@ -1060,7 +1060,7 @@ endif
     " Coc only does snippet and additional edit on confirm.
     inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
     " Or use `complete_info` if your vim support it, like:
-    " inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+    "inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 
     " Use `[g` and `]g` to navigate diagnostics
     nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -1147,7 +1147,7 @@ endif
 " autosave
 "-------------------------------------------------------------------------------
     " enable AutoSave on Vim startup
-    let g:auto_save = 1  
+    let g:auto_save = 0  
     let g:auto_save_events = ["InsertLeave", "TextChanged"]
     "" do not display the auto-save notification
     "let g:auto_save_silent = 1  
