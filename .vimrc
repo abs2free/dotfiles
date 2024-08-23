@@ -638,7 +638,8 @@ if isdirectory(expand("~/.vim/plugged/ctrlp.vim/"))
     let g:ctrlp_working_path_mode = 'ra'
     nnoremap <silent> <C-p> :CtrlP<CR>
     nnoremap <silent> <C-m> :CtrlPMRU<CR>
-    nnoremap <silent> <C-b> :CtrlPBuffer<CR>
+    nnoremap <silent> <leader>b :CtrlPBuffer<CR>
+    "nnoremap <silent> <C-b> :CtrlPBuffer<CR>
     "nnoremap <silent> <C-m> :CtrlPMixed<CR>
     let g:ctrlp_custom_ignore = {
                 \ 'dir':  '\.git$\|\.hg$\|\.svn$',
@@ -928,7 +929,7 @@ endif
     nnoremap <leader>rg :Rg <cr>
     nnoremap <leader>tg :Tags<CR>
     nnoremap <leader>m :Marks<CR>
-    nnoremap <leader>b :Buffers<CR>
+    "nnoremap <leader>b :Buffers<CR>
     nnoremap <leader>h :History
 
     " An action can be a reference to a function that processes selected lines
@@ -1109,8 +1110,8 @@ endif
     omap if <Plug>(coc-funcobj-i)
     omap af <Plug>(coc-funcobj-a)
     " Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-    nmap <silent> <C-d> <Plug>(coc-range-select)
-    xmap <silent> <C-d> <Plug>(coc-range-select)
+    "nmap <silent> <C-d> <Plug>(coc-range-select)
+    "xmap <silent> <C-d> <Plug>(coc-range-select)
     " Use `:Format` to format current buffer
     command! -nargs=0 Format :call CocAction('format')
 
