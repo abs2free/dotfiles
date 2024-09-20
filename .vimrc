@@ -638,16 +638,19 @@ endif
 if isdirectory(expand("~/.vim/plugged/ctrlp.vim/"))
     let g:ctrlp_working_path_mode = 'ra'
     nnoremap <silent> <C-p> :CtrlP<CR>
-    nnoremap <silent> <C-m> :CtrlPMRU<CR>
-    "nnoremap <silent> <leader>b :CtrlPBuffer<CR>
+    "nnoremap <silent> <C-m> :CtrlPMRU<CR>
+    nnoremap <silent> <leader>b :CtrlPBuffer<CR>
     "nnoremap <silent> <C-b> :CtrlPBuffer<CR>
-    "nnoremap <silent> <C-m> :CtrlPMixed<CR>
+    nnoremap <silent> <C-m> :CtrlPMixed<CR>
     let g:ctrlp_custom_ignore = {
                 \ 'dir':  '\.git$\|\.hg$\|\.svn$',
                 \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
 
     " CtrlP extensions
-    let g:ctrlp_extensions = ['funky']
+    let g:ctrlp_extensions = ['funky', 'line']
+
+    "let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
+                            "\ 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
 
     "ctrlp-funky
     nnoremap <Leader>fu :CtrlPFunky<Cr>
