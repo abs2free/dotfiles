@@ -299,6 +299,7 @@ Plug 'dstein64/vim-startuptime'
 Plug 'chr4/nginx.vim'
 Plug 'kshenoy/vim-signature'
 Plug 'morhetz/gruvbox'
+Plug 'neoclide/coc-yaml'
 
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'preservim/vimux'
@@ -927,13 +928,14 @@ endif
 "-------------------------------------------------------------------------------
 " fzf
 "-------------------------------------------------------------------------------
-    nnoremap <leader>ff :Files<CR>
+    nnoremap <leader>f :Files<CR>
     nnoremap <silent> <Leader>ag :Ag <CR>
     nnoremap <leader>rg :Rg <cr>
     nnoremap <leader>tg :Tags<CR>
     nnoremap <leader>m :Marks<CR>
-    "nnoremap <leader>b :Buffers<CR>
-    nnoremap <leader>h :History
+    nnoremap <leader>b :Buffers<CR>
+    nnoremap <leader>h :History<CR>
+    nnoremap <leader>l :Lines<CR>
 
     " An action can be a reference to a function that processes selected lines
     function! s:build_quickfix_list(lines)
@@ -1058,7 +1060,7 @@ endif
       return !col || getline('.')[col - 1]  =~# '\s'
     endfunction
 
--    " Use <c-space> to trigger completion.
+    " Use <c-space> to trigger completion.
     inoremap <silent><expr> <c-space> coc#refresh()
     " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
     " Coc only does snippet and additional edit on confirm.
@@ -1087,45 +1089,45 @@ endif
     " Highlight symbol under cursor on CursorHold
     autocmd CursorHold * silent call CocActionAsync('highlight')
 
-    " Remap for rename current word
-    nmap <F2> <Plug>(coc-rename)
-    " Remap for format selected region
-    xmap <leader>f  <Plug>(coc-format-selected)
-    nmap <leader>f  <Plug>(coc-format-selected)
-    augroup mygroup
-      autocmd!
-      " Setup formatexpr specified filetype(s).
-      autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-      " Update signature help on jump placeholder
-      autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-    augroup end
+   " " Remap for rename current word
+    "nmap <F2> <Plug>(coc-rename)
+    "" Remap for format selected region
+    "xmap <leader>f  <Plug>(coc-format-selected)
+    "nmap <leader>f  <Plug>(coc-format-selected)
+    "augroup mygroup
+      "autocmd!
+      "" Setup formatexpr specified filetype(s).
+      "autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+      "" Update signature help on jump placeholder
+      "autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    "augroup end
 
-    " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-    xmap <leader>a  <Plug>(coc-codeaction-selected)
-    nmap <leader>a  <Plug>(coc-codeaction-selected)
-    " Remap for do codeAction of current line
-    nmap <leader>ac  <Plug>(coc-codeaction)
-    " Fix autofix problem of current line
-    nmap <leader>qf  <Plug>(coc-fix-current)
-    " Create mappings for function text object, requires document symbols feature of languageserver.
-    xmap if <Plug>(coc-funcobj-i)
-    xmap af <Plug>(coc-funcobj-a)
-    omap if <Plug>(coc-funcobj-i)
-    omap af <Plug>(coc-funcobj-a)
-    " Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-    "nmap <silent> <C-d> <Plug>(coc-range-select)
-    "xmap <silent> <C-d> <Plug>(coc-range-select)
-    " Use `:Format` to format current buffer
-    command! -nargs=0 Format :call CocAction('format')
+    "" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+    "xmap <leader>a  <Plug>(coc-codeaction-selected)
+    "nmap <leader>a  <Plug>(coc-codeaction-selected)
+    "" Remap for do codeAction of current line
+    "nmap <leader>ac  <Plug>(coc-codeaction)
+    "" Fix autofix problem of current line
+    "nmap <leader>qf  <Plug>(coc-fix-current)
+    "" Create mappings for function text object, requires document symbols feature of languageserver.
+    "xmap if <Plug>(coc-funcobj-i)
+    "xmap af <Plug>(coc-funcobj-a)
+    "omap if <Plug>(coc-funcobj-i)
+    "omap af <Plug>(coc-funcobj-a)
+    "" Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+    ""nmap <silent> <C-d> <Plug>(coc-range-select)
+    ""xmap <silent> <C-d> <Plug>(coc-range-select)
+    "" Use `:Format` to format current buffer
+    "command! -nargs=0 Format :call CocAction('format')
 
-    " Use `:Fold` to fold current buffer
-    command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+    "" Use `:Fold` to fold current buffer
+    "command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
-    " use `:OR` for organize import of current buffer
-    command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+    "" use `:OR` for organize import of current buffer
+    "command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
-    " Add status line support, for integration with other plugin, checkout `:h coc-status`
-    set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+    "" Add status line support, for integration with other plugin, checkout `:h coc-status`
+    "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
     " Using CocList
     " Show all diagnostics
