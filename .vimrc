@@ -299,7 +299,7 @@ Plug 'dstein64/vim-startuptime'
 Plug 'chr4/nginx.vim'
 Plug 'kshenoy/vim-signature'
 Plug 'morhetz/gruvbox'
-Plug 'neoclide/coc-yaml'
+"Plug 'neoclide/coc-yaml'
 
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'preservim/vimux'
@@ -334,6 +334,7 @@ Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround'
 
 Plug 'rhysd/git-messenger.vim'
+
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 
@@ -373,6 +374,9 @@ Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug '907th/vim-auto-save'
+
+
+Plug 'andrewstuart/vim-kubernetes'
 
 " 插件列表结束
 call plug#end()
@@ -1157,6 +1161,14 @@ endif
     let g:auto_save_events = ["InsertLeave", "TextChanged"]
     "" do not display the auto-save notification
     "let g:auto_save_silent = 1  
+
+
+
+au FileType yaml nmap <leader>ka :KubeApply<CR>
+au FileType yaml nmap <leader>kd :KubeDelete<CR>
+
+au FileType yaml nmap <leader>kad :KubeApplyDir<CR>
+au FileType yaml nmap <leader>kdd :KubeDeleteDir<CR>
 
 
 
