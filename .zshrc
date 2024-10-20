@@ -191,3 +191,8 @@ alias kk="kubectl"
 alias m="minikube"
 alias ff="ffmpeg -hide_banner"
 export PATH="/usr/local/opt/postgresql@16/bin:$PATH"
+
+alias ms="minikube --memory 8192 --cpus 4 start"
+alias mstart="minikube --nodes 4 --memory 5120 --cpus 3 start"
+
+alias mk="make"

@@ -476,7 +476,7 @@ endif
     if isdirectory(expand("~/.vim/plugged/tagbar/"))
         nnoremap <silent> <leader>tt :TagbarToggle<CR>
 
-    autocmd VimEnter * nested :TagbarOpen
+    "autocmd VimEnter * nested :TagbarOpen
     endif
 
 
