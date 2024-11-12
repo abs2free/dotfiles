@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/wscrlhs/.oh-my-zsh"
+export ZSH="/Users/abs2free/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -70,7 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions golang jump docker kubectl zsh-syntax-highlighting autojump)
+plugins=(git fast-syntax-highlighting zsh-autosuggestions golang jump docker kubectl zsh-syntax-highlighting autojump)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -123,8 +123,8 @@ export consul_server=localhost
 export PATH="/usr/local/opt/icu4c/bin:$PATH"
 export PATH="/usr/local/opt/icu4c/sbin:$PATH"
 export PATH="/usr/local/opt/mysql-client@5.7/bin:$PATH"
-export PATH="/Users/wscrlhs/go/bin:$PATH"
-export PATH="/Users/wscrlhs/bin:$PATH"
+export PATH="/Users/abs2free/go/bin:$PATH"
+export PATH="/Users/abs2free/bin:$PATH"
 
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 fpath=(~/.zsh.d/ $fpath)
@@ -132,9 +132,9 @@ fpath=(~/.zsh.d/ $fpath)
 alias ctags='/usr/local/bin/ctags'
 
 # 用于vim ctrl-s 保存
-stty -ixon
-export GVM_ROOT=/Users/wscrlhs/.gvm
-. $GVM_ROOT/scripts/gvm-default
+#stty -ixon
+#export GVM_ROOT=/Users/abs2free/.gvm
+#. $GVM_ROOT/scripts/gvm-default
 export GO111MODULE=on
 export PATH="/usr/local/sbin:$PATH"
 
@@ -158,21 +158,18 @@ export TMUXIFIER_LAYOUT_PATH="$HOME/.tmux-layouts"
 export EDITOR=vim
 alias tm="tmuxifier"
 
-
-source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-
 alias cdd='cd $HOME && cd "$(fd -t d | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)"'
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/wscrlhs/radioconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/Users/abs2free/radioconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/wscrlhs/radioconda/etc/profile.d/conda.sh" ]; then
-        . "/Users/wscrlhs/radioconda/etc/profile.d/conda.sh"
+    if [ -f "/Users/abs2free/radioconda/etc/profile.d/conda.sh" ]; then
+        . "/Users/abs2free/radioconda/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/wscrlhs/radioconda/bin:$PATH"
+        export PATH="/Users/abs2free/radioconda/bin:$PATH"
     fi
 fi
 unset __conda_setup
@@ -182,7 +179,7 @@ export PATH="/usr/local/opt/llvm/bin:$PATH"
 export XDG_CONFIG_HOME="$HOME/.config"
 alias lg="lazygit"
 alias yt="yt-dlp -f "bv+ba/best" --merge-output-format mp4   --proxy socks5://127.0.0.1:7890"
-alias vds="cralwer search --config /Users/wscrlhs/bin --name "
+alias vds="cralwer search --config /Users/abs2free/bin --name "
 
 eval $(thefuck --alias)
 eval "$(zoxide init zsh)"
