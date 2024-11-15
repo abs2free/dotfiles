@@ -1019,6 +1019,10 @@ endif
       \ 'coc-prettier', 
       \ 'coc-json', 
       \ 'coc-go',
+      \ 'coc-html',
+      \ 'coc-css',
+      \ 'coc-yaml',
+      \ 'coc-highlight',
       \ ]
     " from readme
     " if hidden is not set, TextEdit might fail.

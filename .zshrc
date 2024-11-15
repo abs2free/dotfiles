@@ -105,40 +105,50 @@ alias etz="trans :zh"
 alias got="go mod tidy"
 alias ju="jump"
 alias python="python3"
-
 alias viu="vim -u ~/.vim/essential.vim"
-
 alias phpstan='docker run -v $PWD:/app --rm ghcr.io/phpstan/phpstan'
-
 alias asciicast2gif='docker run --rm -v $PWD:/data asciinema/asciicast2gif'
-
 alias yt='yt-dlp -f "bv+ba/best" --merge-output-format mp4   --proxy socks5://127.0.0.1:1081'
+alias ctags='/usr/local/bin/ctags'
+alias tm="tmuxifier"
+alias cdd='cd $HOME && cd "$(fd -t d | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)"'
+alias lg="lazygit"
+alias yt="yt-dlp -f "bv+ba/best" --merge-output-format mp4   --proxy socks5://127.0.0.1:7890"
+alias vds="cralwer search --config /Users/abs2free/bin --name "
+alias k="kubectl"
+alias m="minikube"
+alias ff="ffmpeg -hide_banner"
+alias ms="minikube --memory 8192 --cpus 4 start"
+alias mstart="minikube --nodes 4 --memory 5120 --cpus 3 start"
+alias t="task"
+alias tl='task --list-all'
+alias mk="make"
+alias ngc="nix-store --gc"
 
-export PATH="/usr/local/opt/php@7.3/bin:$PATH"
-export PATH="/usr/local/opt/php@7.3/sbin:$PATH"
+
+# path
 export GOPROXY=https://goproxy.io,direct
-export log_seelog=false
-export log_zaplog=false
-export consul_server=localhost
 export PATH="/usr/local/opt/icu4c/bin:$PATH"
 export PATH="/usr/local/opt/icu4c/sbin:$PATH"
-export PATH="/usr/local/opt/mysql-client@5.7/bin:$PATH"
 export PATH="/Users/abs2free/go/bin:$PATH"
 export PATH="/Users/abs2free/bin:$PATH"
-
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
-fpath=(~/.zsh.d/ $fpath)
+export PATH="/usr/local/opt/curl/bin:$PATH"
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+#export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890
+export PATH="/usr/local/opt/zookeeper/bin:$PATH"
+export PATH="$HOME/.tmux/plugins/tmuxifier/bin:$PATH"
+export TMUXIFIER_LAYOUT_PATH="$HOME/.tmux-layouts"
+export PATH="/usr/local/opt/postgresql@16/bin:$PATH"
+export PATH="/usr/local/opt/mysql-client/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
 
-alias ctags='/usr/local/bin/ctags'
 
-# 用于vim ctrl-s 保存
-#stty -ixon
 #export GVM_ROOT=/Users/abs2free/.gvm
 #. $GVM_ROOT/scripts/gvm-default
 export GO111MODULE=on
-export PATH="/usr/local/sbin:$PATH"
+export EDITOR=vim
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -147,49 +157,9 @@ export NVM_DIR="$HOME/.nvm"
 
 # 防止从剪贴板粘贴url到iterm2时会被转义
 DISABLE_MAGIC_FUNCTIONS=true
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 fpath=(~/.zsh.d/ $fpath)
-export PATH="/usr/local/opt/curl/bin:$PATH"
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-#export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890
-export PATH="/usr/local/opt/zookeeper/bin:$PATH"
 
-export PATH="$HOME/.tmux/plugins/tmuxifier/bin:$PATH"
-export TMUXIFIER_LAYOUT_PATH="$HOME/.tmux-layouts"
-export EDITOR=vim
-alias tm="tmuxifier"
-
-alias cdd='cd $HOME && cd "$(fd -t d | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)"'
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/abs2free/radioconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/abs2free/radioconda/etc/profile.d/conda.sh" ]; then
-        . "/Users/abs2free/radioconda/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/abs2free/radioconda/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-export PATH="/usr/local/opt/llvm/bin:$PATH"
-export XDG_CONFIG_HOME="$HOME/.config"
-alias lg="lazygit"
-alias yt="yt-dlp -f "bv+ba/best" --merge-output-format mp4   --proxy socks5://127.0.0.1:7890"
-alias vds="cralwer search --config /Users/abs2free/bin --name "
-
+# eval
 eval $(thefuck --alias)
 eval "$(zoxide init zsh)"
-
-alias kk="kubectl"
-alias m="minikube"
-alias ff="ffmpeg -hide_banner"
-export PATH="/usr/local/opt/postgresql@16/bin:$PATH"
-
-alias ms="minikube --memory 8192 --cpus 4 start"
-alias mstart="minikube --nodes 4 --memory 5120 --cpus 3 start"
-
-alias mk="make"
