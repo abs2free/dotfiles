@@ -754,8 +754,10 @@ endif
 " :GoAddTags      # manage your tags
 " :GoRemoveTags
 "-------------------------------------------------------------------------------
-    let g:go_def_mode='gopls'
-    let g:go_info_mode='gopls'
+if isdirectory(expand("~/.vim/plugged/vim-go/"))
+
+    "let g:go_def_mode='gopls'
+    "let g:go_info_mode='gopls'
 
     let g:go_fmt_command = "goimports"
     let g:go_fmt_fail_silently = 1
@@ -772,7 +774,6 @@ endif
     " Automatically get signature/type info for object under cursor
     let g:go_auto_type_info = 1
 
-    
     let g:go_metalinter_autosave = 0
     let g:go_metalinter_command = "golangci-lint"
     let g:go_metalinter_autosave_enabled = ['vet', 'staticcheck', 'gosimple']
@@ -801,6 +802,7 @@ endif
     " quickfix window 正下方位置
     autocmd FileType qf wincmd J
 
+endif
 
 "-------------------------------------------------------------------------------
 " vim-markdown 
@@ -904,6 +906,7 @@ endif
 "-------------------------------------------------------------------------------
 " vimux
 "-------------------------------------------------------------------------------
+    map <Leader>gr :call VimuxRunCommand("go run " . bufname("%"))<CR>
     map <Leader>gt :call VimuxRunCommand("go test -run " .go#util#TestName()." -v")<CR>
 
     let g:VimuxOrientation = "h"

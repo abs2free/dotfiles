@@ -136,6 +136,7 @@ alias mk="make"
 alias ngc="nix-store --gc"
 
 alias vpn="sh ~/bin/vpn.sh"
+alias tx="tmux"
 
 # path
 export GOPROXY=https://goproxy.io,direct
