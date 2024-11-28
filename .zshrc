@@ -134,7 +134,6 @@ alias t="task"
 alias tl='task --list-all'
 alias mk="make"
 alias ngc="nix-store --gc"
-
 alias vpn="sh ~/bin/vpn.sh"
 alias tx="tmux"
 
@@ -159,15 +158,8 @@ export PATH="/usr/local/sbin:$PATH"
 export GO111MODULE=on
 export EDITOR=vim
 
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-
 # 防止从剪贴板粘贴url到iterm2时会被转义
 DISABLE_MAGIC_FUNCTIONS=true
-
 
 # ---- FZF -----
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -180,7 +172,8 @@ bg_highlight="#143652"
 purple="#B388FF"
 blue="#06BCE4"
 cyan="#2CF9ED"
-export FZF_DEFAULT_OPTS="--color=fg:${fg},bg:${bg},hl:${purple},fg+:${fg},bg+:${bg_highlight},hl+:${purple},info:${blue},prompt:${cyan},pointer:${cyan},marker:${cyan},spinner:${cyan},header:${cyan}"
+export FZF_DEFAULT_OPTS="--color=fg:${fg},bg:${bg},hl:${purple},fg+:${fg},bg+:${bg_highlight},hl+:${purple},info:${blue},prompt:${cyan},pointer:${cyan},marker:${cyan},spinner:${cyan},header:${cyan}  
+--height 100%"
 
 # eval
 eval $(thefuck --alias)
