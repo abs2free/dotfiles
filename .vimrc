@@ -1,24 +1,3 @@
-"==============================================================================
-" File: .vimrc
-"===============================================================================
-
-
-"-------------------------------------------------------------------------------
-" Identify platform 
-"-------------------------------------------------------------------------------
-silent function! OSX()
-return has('macunix')
-endfunction
-
-silent function! LINUX()
-return has('unix') && !has('macunix') && !has('win32unix')
-endfunction
-
-silent function! WINDOWS()
-return  (has('win32') || has('win64')) || has("multi_byte")
-endfunction
-
-
 "-------------------------------------------------------------------------------
 " Basic 基本配置
 "-------------------------------------------------------------------------------
@@ -74,7 +53,6 @@ set relativenumber
 set cursorline
 set cursorcolumn
 
-
 " 禁止折行
 set nowrap
 " 设置自动折行
@@ -87,14 +65,11 @@ syntax on
 
 " 将制表符扩展为空格
 "set expandtab
-
 " 设置编辑时制表符占用空格数
 set tabstop=4
-
 " 设置格式化时制表符占用空格数
 set shiftwidth=4
-
-" 让vim 把连续数量的空格视为一个制表符
+" 在插入模式下，按下 Tab 键时插入的空格数
 set softtabstop=4
 
 " 设置vim显示字体
@@ -124,16 +99,12 @@ set foldcolumn =1
 " 指定折叠缩进级别
 set foldlevel =0
 
-
 "-------------------------------------------------------------------------------
 " 高级配置 
 "-------------------------------------------------------------------------------
 " 编码转gbk
 noremap <leader>gbk :e ++enc=gbk<CR>
 noremap <leader>utf :e ++enc=utf-8<CR>
-
-" Ctrl-A 选中所有内容
-"noremap <silent>  <Leader>a  gg v G
 
 " 多窗口操作
 noremap <C-J> <C-W>j<C-W>
@@ -148,23 +119,8 @@ set path+=**
 set ignorecase smartcase
 set grepprg=grep\ -IrsnH
 
-if WINDOWS()
-    set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-endif
-
-" 缩写 ,ctrl-v取消效果
-iab @i wscrlhs@gmail.com
-
 " 设置对齐线 excellent
  set list listchars=nbsp:¬,tab:»·,trail:·,extends:>
-
-" 自启动设置 
-"autocmd vimenter * NERDTree
-
-" ctrl+s 实现保存功能
-nmap <C-S> :w<CR>
-vmap <C-S> <C-C>:w<CR>
-imap <C-S> <Esc>:w<CR>
 
 filetype plugin on
 
@@ -223,48 +179,8 @@ noremap <silent><leader>2 :tabn 2<cr>
 noremap <silent><leader>3 :tabn 3<cr>
 noremap <silent><leader>4 :tabn 4<cr>
 noremap <silent><leader>5 :tabn 5<cr>
-noremap <silent><leader>6 :tabn 6<cr>
-noremap <silent><leader>7 :tabn 7<cr>
-noremap <silent><leader>8 :tabn 8<cr>
-noremap <silent><leader>9 :tabn 9<cr>
-noremap <silent><leader>0 :tabn 10<cr>
 noremap <silent><s-tab> :tabnext<CR>
 inoremap <silent><s-tab> <ESC>:tabnext<CR>
-
-
-"-------------------------------------------------------------------------------
-"  函数
-"-------------------------------------------------------------------------------
-"拼写检查
-"if has('spell')
-"  setglobal spelllang=en_us
-"  setglobal spellfile=~/.vim/spell/en.utf-8.add
-"  "if &rtp =~# 'Dropbox.Code.vim'
-"  "  setglobal spellfile^=~/Dropbox/Code/vim/spell/en.utf-8.add
-"  "endif
-"  let g:spellfile_URL = 'http://ftp.vim.org/vim/runtime/spell'
-"  autocmd FileType help if &buftype ==# 'help' | setlocal nospell | endif
-"endif
-
-
-"统计中文字数
-"function! ChineseCount() range
-"	let save = @z
-"	silent exec 'normal! gv"zy'
-"	let text = @z
-"	let @z = save
-"	silent exec 'normal! gv'
-"	let cc = 0
-"	for char in split(text, '\zs')
-"		if char2nr(char) >= 0x2000
-"			let cc += 1
-"		endif
-"	endfor
-"	echo "Count of Chinese charasters is:"
-"	echo cc
-"endfunc
-"
-"vnoremap <F7> :call ChineseCount()<cr>
 
 "-------------------------------------------------------------------------------
 " 插件管理 
@@ -299,88 +215,41 @@ Plug 'dstein64/vim-startuptime'
 Plug 'chr4/nginx.vim'
 Plug 'kshenoy/vim-signature'
 Plug 'morhetz/gruvbox'
-"Plug 'neoclide/coc-yaml'
-
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'preservim/vimux'
-
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
-
-"Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
-
 Plug 'plasticboy/vim-markdown'
-
 Plug 'tpope/vim-fugitive'
-
 Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
-
 Plug 'mbbill/undotree'
-
-
 Plug 'vim-autoformat/vim-autoformat'
-
-" 这个插件需要私人定制 https://keelii.com/2018/08/26/vim-plugin-ultisnips-advanced-tips/
-"Plug 'SirVer/ultisnips'
-
 Plug 'honza/vim-snippets'
 "Plug 'wscrlhs/vim-snippets'
-
 Plug 'tpope/vim-surround'
-
 Plug 'rhysd/git-messenger.vim'
-
-
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
-
-" <leader>cc 注释当前行和选中行
-" <leader>cn 没有发现和\cc有区别
-" <leader>c<空格> 如果被选区域有部分被注释，则对被选区域执行取消注释操作，其它情况执行反转注释操作
-" <leader>cm 对被选区域用一对注释符进行注释，前面的注释对每一行都会添加注释
-" <leader>ci 执行反转注释操作，选中区域注释部分取消注释，非注释部分添加注释
-" <leader>cs 添加性感的注释，代码开头介绍部分通常使用该注释
-" <leader>cy 添加注释，并复制被添加注释的部分
-" <leader>c$ 注释当前光标到改行结尾的内容
-" <leader>cA 跳转到该行结尾添加注释，并进入编辑模式
-" <leader>ca 转换注释的方式，比如： /**/和//
-" <leader>cl \cb 左对齐和左右对其，左右对其主要针对/**/
-" <leader>cu 取消注释
 Plug 'preservim/nerdcommenter'
-
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-
 Plug 'voldikss/vim-floaterm'
-
-" 不再使用的
-"Plug 'vimwiki/vimwiki'
-"Plug 'itchyny/calendar.vim'
-
 Plug 'airblade/vim-rooter'
-
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-
-
 "typescript
 Plug 'pangloss/vim-javascript'    " JavaScript support
 Plug 'leafgarland/typescript-vim' " TypeScript syntax
 Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
 "Plug 'jparise/vim-graphql'        " GraphQL syntax
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
 Plug '907th/vim-auto-save'
-
-
 Plug 'andrewstuart/vim-kubernetes'
 
 " 插件列表结束
 call plug#end()
-
 
 "===============================================================================
        "配置项
@@ -405,7 +274,7 @@ endif
 "-------------------------------------------------------------------------------
 " Vim-Color 
 "-------------------------------------------------------------------------------
-"if isdirectory(expand("~/.vim/plugged/gruvbox/"))
+if isdirectory(expand("~/.vim/plugged/gruvbox/"))
     " 配色方案
     "set background=light
     set background=dark
@@ -415,7 +284,7 @@ endif
     let g:solarized_visibility="normal"
     "colorscheme solarized                                                                               │    │
     colorscheme gruvbox
-"endif
+endif
 
 
 "-------------------------------------------------------------------------------
@@ -424,6 +293,8 @@ endif
 if isdirectory(expand("~/.vim/plugged/nerdtree/"))
     map <C-e> <plug>NERDTreeTabsToggle<CR>
     map <leader>e :NERDTreeFind<CR>
+	" 自启动设置 
+	"autocmd vimenter * NERDTree
 
     let g:NERDTreeIgnore = ['^node_modules$']
 
@@ -478,7 +349,6 @@ endif
 
     "autocmd VimEnter * nested :TagbarOpen
     endif
-
 
 
 "-------------------------------------------------------------------------------
@@ -546,72 +416,6 @@ if isdirectory(expand("~/.vim/plugged/incsearch.vim/"))
 endif
 
 
-""-------------------------------------------------------------------------------
-"" YouCompleteMe 
-""-------------------------------------------------------------------------------
-"if isdirectory(expand("~/.vim/plugged/YouCompleteMe/"))
-"    if OSX()
-"        let g:acp_enableAtStartup = 0
-"
-"        " enable completion from tags
-"        let g:ycm_collect_identifiers_from_tags_files = 1
-"
-"        " remap Ultisnips for compatibility for YCM
-"        let g:UltiSnipsExpandTrigger = '<C-j>'
-"        let g:UltiSnipsJumpForwardTrigger = '<C-j>'
-"        let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
-"        let g:ycm_key_invoke_completion = '<c-z>'
-"
-"        " Enable omni completion.
-"        autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-"        autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-"        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-"        autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-"        autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-"        autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-"        autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-"        autocmd FileType javascript nmap <buffer> <C-]> :YcmCompleter GoTo<CR>
-"
-"       " 颜色配置
-"       "highlight Pmenu ctermfg=12 ctermbg=0 guifg=#ffffff guibg=#000000
-"       "highlight PMenuSel ctermfg=242 ctermbg=8 guifg=darkgrey guibg=black
-"       "highlight Conceal guifg=White guibg=Red
-"       " 由于YCM的警告语句在黑色终端下配色很模糊，修改成较为高亮的蓝底黑字
-"       "highlight link YcmWarningSection Pmenu
-"
-"        " Haskell post write lint and check with ghcmod
-"        " $ `cabal install ghcmod` if missing and ensure
-"        " ~/.cabal/bin is in your $PATH.
-"        if !executable("ghcmod")
-"            autocmd BufWritePost *.hs GhcModCheckAndLintAsync
-"        endif
-"
-"        " For snippet_complete marker.
-"        if !exists("g:spf13_no_conceal")
-"            if has('conceal')
-"                set conceallevel=2 concealcursor=i
-"            endif
-"        endif
-"
-"        " Disable the neosnippet preview candidate window
-"        " When enabled, there can be too much visual noise
-"        " especially when splits are used.
-"        set completeopt-=preview
-"
-"        " lsp-service
-"        let s:lsp = '/Users/wscrlhs/work/github/lsp-examples'
-"        let g:ycm_language_server = [
-"            \   {
-"            \     'name': 'php',
-"            \     'cmdline': [ 'php', expand( s:lsp . '/php/vendor/bin/php-language-server.php' ) ],
-"            \     'filetypes': [ 'php' ],
-"            \     'lua': ['.', ':'],
-"            \   },
-"            \ ]
-"    endif
-"endif
-
-
 "-------------------------------------------------------------------------------
 " Undotree 
 "-------------------------------------------------------------------------------
@@ -635,6 +439,7 @@ if isdirectory(expand("~/.vim/plugged/undotree/"))
     let g:undotree_SetFocusWhenToggle=1
 
 endif
+
 
 "-------------------------------------------------------------------------------
 " Ctrlp 
@@ -665,63 +470,6 @@ if isdirectory(expand("~/.vim/plugged/ctrlp.vim/"))
     let g:ctrlp_funky_syntax_highlight = 1
     let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 endif
-
-
-"-------------------------------------------------------------------------------
-" LeaderF
-"-------------------------------------------------------------------------------
-"if isdirectory(expand("~/.vim/plugged/LeaderF/"))
-    "" don't show the help in normal mode
-    "let g:Lf_HideHelp = 1
-    "let g:Lf_UseCache = 0
-    "let g:Lf_UseVersionControlTool = 0
-    "let g:Lf_IgnoreCurrentBufferName = 1
-    "" popup mode
-    "let g:Lf_WindowPosition = 'popup'
-    "let g:Lf_PreviewInPopup = 1
-    "let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2", 'font': "DejaVu Sans Mono for Powerline" }
-    "let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
-    "let g:Lf_CommandMap = {'<C-K>': ['<Up>'], '<C-J>': ['<Down>']}
-
-    "let g:Lf_NormalCommandMap = {
-         "\ "*":      {
-         "\               "<C-Down>": "<C-J>",
-         "\               "<C-Up>":   "<C-K>"
-         "\           },
-         "\ "File":   {
-         "\               "q":     "<Esc>",
-         "\               "a":     "<C-A>",
-         "\               "<Esc>": "<C-W>",
-         "\           },
-         "\ "Buffer": {},
-         "\ "Mru":    {},
-         "\ "Tag":    {},
-         "\ "BufTag": {},
-         "\ "Function": {},
-         "\ "Line":   {},
-         "\ "History":{},
-         "\ "Help":   {},
-         "\ "Rg":     {},
-         "\ "Gtags":  {},
-         "\ "Colorscheme": {}
-         "\}
-
-     "let g:Lf_ShortcutF = "<leader>ff"
-     "nnoremap <silent> <Leader>rg :Leaderf rg<CR>
-     "nnoremap <silent> <Leader>mru :Leaderf mru<CR>
-     "noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
-     "noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
-     "noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
-     "noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
-
-     "noremap<C-B> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
-     "noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
-
-     "" search visually selected text literally
-     "xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
-     "noremap go :<C-U>Leaderf! rg --recall<CR>
-
-"endif
 
 
 "-------------------------------------------------------------------------------
@@ -832,8 +580,6 @@ endif
     "nnoremap gdl :diffget //3<CR>
 
 
-
-
 "-------------------------------------------------------------------------------
 " vim-snippets
 "-------------------------------------------------------------------------------
@@ -848,38 +594,6 @@ endif
 " vim - emoji
 "-------------------------------------------------------------------------------
     set completefunc=emoji#complete
-
-
-
-"-------------------------------------------------------------------------------
-" vim-wiki
-" Basic key bindings
-" <Leader>ww -- Open default wiki index file.
-" <Leader>wt -- Open default wiki index file in a new tab.
-" <Leader>ws -- Select and open wiki index file.
-" <Leader>wd -- Delete wiki file you are in.
-" <Leader>wr -- Rename wiki file you are in.
-" <Enter> -- Follow/Create wiki link.
-" <Shift-Enter> -- Split and follow/create wiki link.
-" <Ctrl-Enter> -- Vertical split and follow/create wiki link.
-" <Backspace> -- Go back to parent(previous) wiki link.
-" <Tab> -- Find next wiki link.
-" <Shift-Tab> -- Fid previous wiki link.
-" Advanced key bindings
-" Refer to the complete documentation at :h vimwiki-mappings to see many more bindings.
-"-------------------------------------------------------------------------------
-"   " calendar
-"    map <F8> :Calendar<cr>
-"    autocmd FileType calendar nmap <buffer> <CR> :<C-u>call vimwiki#diary#calendar_action(b:calendar.day().get_day(), b:calendar.day().get_month(), b:calendar.day().get_year(), b:calendar.day().week(), "V")<CR>
-"
-"    let g:vimwiki_list = [{'path': '~/doc/vim/vimwiki/', 'ext': '.md', 'syntax': 'markdown'}]
-
-    " <leader>ww 在当前窗口打开维基首页
-    " <leader>wt 在新tab打开维基首页
-    " <leader>w<leader>w 打开/新建当天日记
-    " <leader>w<keader>t 在新tab打开/新建当天日记
-    " <leader>ws 选择维基项目（详见下面的“多个维基项目”一节）
-
 
 "-------------------------------------------------------------------------------
 " markdown-preview
@@ -1159,7 +873,6 @@ endif
     nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 
-
 "-------------------------------------------------------------------------------
 " autosave
 "-------------------------------------------------------------------------------
@@ -1169,14 +882,15 @@ endif
     "" do not display the auto-save notification
     "let g:auto_save_silent = 1  
 
+"-------------------------------------------------------------------------------
+" vim-kubernetes
+"-------------------------------------------------------------------------------
 
+	au FileType yaml nmap <leader>ka :KubeApply<CR>
+	au FileType yaml nmap <leader>kd :KubeDelete<CR>
 
-au FileType yaml nmap <leader>ka :KubeApply<CR>
-au FileType yaml nmap <leader>kd :KubeDelete<CR>
-
-au FileType yaml nmap <leader>kad :KubeApplyDir<CR>
-au FileType yaml nmap <leader>kdd :KubeDeleteDir<CR>
-
+	au FileType yaml nmap <leader>kad :KubeApplyDir<CR>
+	au FileType yaml nmap <leader>kdd :KubeDeleteDir<CR>
 
 
 "-------------------------------------------------------------------------------
