@@ -86,7 +86,7 @@ syntax enable
 syntax on
 
 " 将制表符扩展为空格
-set expandtab
+"set expandtab
 
 " 设置编辑时制表符占用空格数
 set tabstop=4
