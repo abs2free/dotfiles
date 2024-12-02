@@ -852,7 +852,7 @@ endif
     "command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
     "" Add status line support, for integration with other plugin, checkout `:h coc-status`
-    "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+    set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
     " Using CocList
     " Show all diagnostics
@@ -892,6 +892,20 @@ endif
 	au FileType yaml nmap <leader>kad :KubeApplyDir<CR>
 	au FileType yaml nmap <leader>kdd :KubeDeleteDir<CR>
 
+
+"-------------------------------------------------------------------------------
+" 自定义函数
+"-------------------------------------------------------------------------------
+
+	" 清除所有的寄存器
+	function! ClearRegisters()
+		let regs='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"'
+		let i=0
+		while (i<strlen(regs))
+			exec 'let @'.regs[i].'=""'
+			let i=i+1
+		endwhile
+	endfunction
 
 "-------------------------------------------------------------------------------
 " 防止覆盖,在末尾配置
