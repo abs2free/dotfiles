@@ -598,8 +598,8 @@ endif
 "-------------------------------------------------------------------------------
 " markdown-preview
 "-------------------------------------------------------------------------------
-    nmap <C-s> <Plug>MarkdownPreview
-    nmap <M-s> <Plug>MarkdownPreviewStop
+    nmap <C-s> <Plug>MarkdownPreviewToggle
+    "nmap <M-s> <Plug>MarkdownPreviewStop
    " nmap <C-p> <Plug>MarkdownPreviewToggle
 
 
