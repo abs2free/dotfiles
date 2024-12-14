@@ -11,6 +11,8 @@ autocmd BufWritePost $MYVIMRC source $MYVIMRC
 set incsearch
 " 高亮显示搜索结果
 set hlsearch
+" 启用终端真彩色显示，提高代码可读性
+set termguicolors
 
 " 搜索时大小写不敏感
 set ignorecase
@@ -276,14 +278,15 @@ endif
 "-------------------------------------------------------------------------------
 if isdirectory(expand("~/.vim/plugged/gruvbox/"))
     " 配色方案
-    "set background=light
-    set background=dark
+	"set background=light
+	set background=dark
     let g:solarized_termcolors=256
     let g:solarized_termtrans=1
     let g:solarized_contrast="normal"
     let g:solarized_visibility="normal"
-    "colorscheme solarized                                                                               │    │
+    "colorscheme solarized
     colorscheme gruvbox
+	"let g:gruvbox_contrast_dark="soft"
 endif
 
 
@@ -674,30 +677,54 @@ endif
     " Default fzf layout
     " - Popup window (center of the current window)
     let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'relative': v:true } }
+	" 一些增强功能
+	let g:fzf_preview_window = ['right:60%', 'ctrl-/'] " 设置预览窗口，并在右侧显示 60% 宽度，使用 ctrl-/ 切换预览窗口的显示和隐藏
+	"let g:fzf_preview_center = 'hidden' " 默认隐藏预览窗口
 
 
-    " Customize fzf colors to match your color scheme
-    " - fzf#wrap translates this to a set of `--color` options
-    let g:fzf_colors =
-    \ { 'fg':      ['fg', 'Normal'],
-      \ 'bg':      ['bg', 'Normal'],
-      \ 'hl':      ['fg', 'Comment'],
-      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-      \ 'hl+':     ['fg', 'Statement'],
-      \ 'info':    ['fg', 'PreProc'],
-      \ 'border':  ['fg', 'Ignore'],
-      \ 'prompt':  ['fg', 'Conditional'],
-      \ 'pointer': ['fg', 'Exception'],
-      \ 'marker':  ['fg', 'Keyword'],
-      \ 'spinner': ['fg', 'Label'],
-      \ 'header':  ['fg', 'Comment'] }
+	" Gruvbox Dark 风格的 fzf 颜色配置
+	let g:fzf_colors = {
+	\ 'fg':      ['fg', 'Normal'],
+    \ 'bg':      ['bg', 'Normal'],
+	\ 'hl':      ['#b16286', 'Comment'],
+	\ 'fg+':     ['#ebdbb2', 'CursorLine', 'CursorColumn', 'Normal'],
+	\ 'bg+':     ['#3c3836', 'Normal', 'Normal'],
+	\ 'hl+':     ['#fb4934', 'Normal'],
+	\ 'info':    ['#fabd2f', 'Normal'],
+	\ 'border':  ['#928374', 'Normal'],
+	\ 'prompt':  ['#83a598', 'Normal'],
+	\ 'marker':  ['#fe8019', 'Normal'],
+	\ 'spinner': ['#8ec07c', 'Normal'],
+	\ 'header':  ['#83a598', 'Normal'],
+	\ }
+
+    "" Customize fzf colors to match your color scheme
+    "" - fzf#wrap translates this to a set of `--color` options
+    "let g:fzf_colors =
+    "\ { 'fg':      ['fg', 'Normal'],
+      "\ 'bg':      ['bg', 'Normal'],
+      "\ 'hl':      ['fg', 'Comment'],
+      "\ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      "\ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      "\ 'hl+':     ['fg', 'Statement'],
+      "\ 'info':    ['fg', 'PreProc'],
+      "\ 'border':  ['fg', 'Ignore'],
+      "\ 'prompt':  ['fg', 'Conditional'],
+      "\ 'pointer': ['fg', 'Exception'],
+      "\ 'marker':  ['fg', 'Keyword'],
+      "\ 'spinner': ['fg', 'Label'],
+    "  \ 'header':  ['fg', 'Comment'] }
 
     " Enable per-command history
     " - History files will be stored in the specified directory
     " - When set, CTRL-N and CTRL-P will be bound to 'next-history' and
     "   'previous-history' instead of 'down' and 'up'.
     let g:fzf_history_dir = '~/.local/share/fzf-history'
+	" 使用 fd 命令 (需要安装 fd: brew install fd) 速度更快
+	if executable('fd')
+	  let g:fzf_files_command = 'fd -t f'
+	  let g:fzf_dir_command = 'fd -t d'
+	endif
 
     " [Buffers] Jump to the existing window if possible
     let g:fzf_buffers_jump = 1
@@ -707,6 +734,11 @@ endif
     let g:fzf_tags_command = 'ctags -R'
     " [Commands] --expect expression for directly executing the command
     let g:fzf_commands_expect = 'alt-enter,ctrl-x'
+
+	nnoremap <silent> <C-p>: Files«CR>
+	nnoremap <silent> <C-g> :GFiles<CR>
+	noremap <silent> <C-o> :Buffers<CR>
+	noremap <C-f> :Rg!
 
 
     " Custom statusline

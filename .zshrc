@@ -121,7 +121,7 @@ alias asciicast2gif='docker run --rm -v $PWD:/data asciinema/asciicast2gif'
 alias yt='yt-dlp -f "bv+ba/best" --merge-output-format mp4   --proxy socks5://127.0.0.1:1081'
 alias ctags='/usr/local/bin/ctags'
 alias tm="tmuxifier"
-alias cdd='cd $HOME && cd "$(fd -t d | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)"'
+#alias cdd='cd $HOME && cd "$(fd -t d | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)"'
 alias lg="lazygit"
 alias yt="yt-dlp -f "bv+ba/best" --merge-output-format mp4   --proxy socks5://127.0.0.1:7890"
 alias vds="cralwer search --config /Users/abs2free/bin --name "
@@ -161,20 +161,6 @@ export EDITOR=vim
 # 防止从剪贴板粘贴url到iterm2时会被转义
 DISABLE_MAGIC_FUNCTIONS=true
 
-# ---- FZF -----
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-fpath=(~/.zsh.d/ $fpath)
-
-# --- setup fzf theme ---
-fg="#CBE0F0"
-bg="#011628"
-bg_highlight="#143652"
-purple="#B388FF"
-blue="#06BCE4"
-cyan="#2CF9ED"
-export FZF_DEFAULT_OPTS="--color=fg:${fg},bg:${bg},hl:${purple},fg+:${fg},bg+:${bg_highlight},hl+:${purple},info:${blue},prompt:${cyan},pointer:${cyan},marker:${cyan},spinner:${cyan},header:${cyan}  
---height 100%"
-
 # eval
 eval $(thefuck --alias)
 eval "$(zoxide init zsh)"
@@ -208,3 +194,60 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+
+
+# ---- FZF -----
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+fpath=(~/.zsh.d/ $fpath)
+
+# --- setup fzf theme ---
+# Options to fzf command
+export FZF_COMPLETION_OPTS='--border --info=inline'
+# Options for path completion (e.g. vim **<TAB>)
+export FZF_COMPLETION_PATH_OPTS='--walker file,dir,follow,hidden'
+# Options for directory completion (e.g. cd **<TAB>)
+export FZF_COMPLETION_DIR_OPTS='--walker dir,follow'
+
+# 默认使用 fd 命令查找文件，速度更快（需要先安装 fd: brew install fd）
+# 使用 fd 时排除某些目录 (例如 .git, node_modules)
+export FZF_DEFAULT_COMMAND='fd --type f -E .git -E node_modules'
+fg="#CBE0F0"
+bg="#011628"
+bg_highlight="#143652"
+purple="#B388FF"
+blue="#06BCE4"
+cyan="#2CF9ED"
+export FZF_DEFAULT_OPTS="--color=fg:${fg},bg:${bg},hl:${purple},fg+:${fg},bg+:${bg_highlight},hl+:${purple},info:${blue},prompt:${cyan},pointer:${cyan},marker:${cyan},spinner:${cyan},header:${cyan}  
+--height 100%
+--exact"
+
+# 设置 Ctrl+T 快捷键绑定的命令，用于查找文件。
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND" # Ctrl+T 绑定的命令
+#设置 Ctrl+T 的选项，--preview 可以在 FZF 窗口中预览文件内容。使用 bat 可以提供语法高亮。
+export FZF_CTRL_T_OPTS="--preview 'head -n 500 | bat --style=numbers --color=always {}'"
+
+export FZF_ALT_C_COMMAND='fd --type d' # Alt+C 绑定的命令，用于快速切换目录
+export FZF_ALT_C_OPTS="--preview 'tree {}'" #Alt + c预览目录树
+
+# 历史命令搜索增强
+export FZF_CTRL_R_OPTS="--preview 'echo {}'"
+
+# 使用 ag (The Silver Searcher) 替代 fd，如果你的项目代码量巨大，ag 可能更快 (需要先安装 ag: brew install the_silver_searcher)
+# export FZF_DEFAULT_COMMAND='ag -l "" .'
+# export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+
+# Advanced customization of fzf options via _fzf_comprun function
+# - The first argument to the function is the name of the command.
+# - You should make sure to pass the rest of the arguments ($@) to fzf.
+_fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    cd)           fzf --preview 'tree -C {} | head -200'   "$@" ;;
+    export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
+    ssh)          fzf --preview 'dig {}'                   "$@" ;;
+    *)            fzf --preview 'bat -n --color=always {}' "$@" ;;
+  esac
+}
