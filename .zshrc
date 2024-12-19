@@ -197,8 +197,6 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 
 # ---- FZF -----
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-fpath=(~/.zsh.d/ $fpath)
 
 # --- setup fzf theme ---
 # Options to fzf command
