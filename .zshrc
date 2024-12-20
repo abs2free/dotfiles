@@ -118,12 +118,12 @@ alias python="python3"
 alias viu="vim -u ~/.vim/essential.vim"
 alias phpstan='docker run -v $PWD:/app --rm ghcr.io/phpstan/phpstan'
 alias asciicast2gif='docker run --rm -v $PWD:/data asciinema/asciicast2gif'
-alias yt='yt-dlp -f "bv+ba/best" --merge-output-format mp4   --proxy socks5://127.0.0.1:1081'
+alias yt='yt-dlp -f "bv+ba/best" --merge-output-format mp4 '
 alias ctags='/usr/local/bin/ctags'
 alias tm="tmuxifier"
 #alias cdd='cd $HOME && cd "$(fd -t d | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)"'
 alias lg="lazygit"
-alias yt="yt-dlp -f "bv+ba/best" --merge-output-format mp4   --proxy socks5://127.0.0.1:7890"
+alias ytf="yt-dlp -f "bv+ba/best" --merge-output-format mp4   --proxy socks5://127.0.0.1:7890"
 alias vds="cralwer search --config /Users/abs2free/bin --name "
 alias k="kubectl"
 alias m="minikube"
@@ -136,7 +136,7 @@ alias mk="make"
 alias ngc="nix-store --gc"
 alias vpn="sh ~/bin/vpn.sh"
 alias tx="tmux"
-
+alias rsy="rsync -av --ignore-existing --progress"
 # path
 export GOPROXY=https://goproxy.io,direct
 export PATH="/usr/local/opt/icu4c/bin:$PATH"
