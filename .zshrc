@@ -118,7 +118,7 @@ alias python="python3"
 alias viu="vim -u ~/.vim/essential.vim"
 alias phpstan='docker run -v $PWD:/app --rm ghcr.io/phpstan/phpstan'
 alias asciicast2gif='docker run --rm -v $PWD:/data asciinema/asciicast2gif'
-alias yt='yt-dlp -f "bv+ba/best" --merge-output-format mp4 '
+alias yt='yt-dlp -f "bv+ba/best" --merge-output-format mp4 --cookies-from-browser chrome --cookies cookies.txt '
 alias ctags='/usr/local/bin/ctags'
 alias tm="tmuxifier"
 #alias cdd='cd $HOME && cd "$(fd -t d | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)"'
