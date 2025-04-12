@@ -79,7 +79,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git fast-syntax-highlighting zsh-autosuggestions zsh-interactive-cd
-    golang jump docker kubectl zsh-syntax-highlighting auto-notify fzf
+    golang jump kubectl zsh-syntax-highlighting auto-notify fzf
     autojump web-search zsh-completions zsh-history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
@@ -120,7 +120,11 @@ alias phpstan='docker run -v $PWD:/app --rm ghcr.io/phpstan/phpstan'
 alias asciicast2gif='docker run --rm -v $PWD:/data asciinema/asciicast2gif'
 alias yt='yt-dlp -f "bv+ba/best" --merge-output-format mp4 --cookies-from-browser chrome --cookies cookies.txt '
 alias ctags='/usr/local/bin/ctags'
+
 alias tm="tmuxifier"
+alias tmw="tmuxifier load-window"
+alias tms="tmuxifier load-session"
+
 #alias cdd='cd $HOME && cd "$(fd -t d | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)"'
 alias lg="lazygit"
 alias ytf="yt-dlp -f "bv+ba/best" --merge-output-format mp4   --proxy socks5://127.0.0.1:7890"
@@ -249,3 +253,8 @@ _fzf_comprun() {
     *)            fzf --preview 'bat -n --color=always {}' "$@" ;;
   esac
 }
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/abs2free/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions

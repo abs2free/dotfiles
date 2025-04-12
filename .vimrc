@@ -531,6 +531,8 @@ if isdirectory(expand("~/.vim/plugged/vim-go/"))
     "let g:go_metalinter_deadline = "5s"
     let g:go_fmt_experimental = 1
 
+	let g:go_debug_workdir = '.'
+
     " highlight same variable in view
     let g:go_auto_sameids = 1
     let g:go_list_type = "quickfix"
@@ -737,7 +739,7 @@ endif
 
 	nnoremap <silent> <C-p>: Files«CR>
 	nnoremap <silent> <C-g> :GFiles<CR>
-	noremap <silent> <C-o> :Buffers<CR>
+	"noremap <silent> <C-o> :Buffers<CR>
 	noremap <C-f> :Rg!
 
 
