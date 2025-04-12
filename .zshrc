@@ -166,8 +166,8 @@ export EDITOR=vim
 DISABLE_MAGIC_FUNCTIONS=true
 
 # eval
-eval $(thefuck --alias)
-eval "$(zoxide init zsh)"
+#eval $(thefuck --alias)
+#eval "$(zoxide init zsh)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -239,22 +239,18 @@ export FZF_CTRL_R_OPTS="--preview 'echo {}'"
 # export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 
-# Advanced customization of fzf options via _fzf_comprun function
-# - The first argument to the function is the name of the command.
-# - You should make sure to pass the rest of the arguments ($@) to fzf.
-_fzf_comprun() {
-  local command=$1
-  shift
-
-  case "$command" in
-    cd)           fzf --preview 'tree -C {} | head -200'   "$@" ;;
-    export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
-    ssh)          fzf --preview 'dig {}'                   "$@" ;;
-    *)            fzf --preview 'bat -n --color=always {}' "$@" ;;
-  esac
-}
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/abs2free/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
-# End of Docker CLI completions
+# # Advanced customization of fzf options via _fzf_comprun function
+# # - The first argument to the function is the name of the command.
+# # - You should make sure to pass the rest of the arguments ($@) to fzf.
+# _fzf_comprun() {
+#   local command=$1
+#   shift
+# 
+#   case "$command" in
+#     cd)           fzf --preview 'tree -C {} | head -200'   "$@" ;;
+#     export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
+#     ssh)          fzf --preview 'dig {}'                   "$@" ;;
+#     *)            fzf --preview 'bat -n --color=always {}' "$@" ;;
+#   esac
+# }
+#
