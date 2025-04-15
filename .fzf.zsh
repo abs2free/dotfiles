@@ -1,13 +1,13 @@
 # Setup fzf
 # ---------
-if [[ ! "$PATH" == */Users/wscrlhs/.fzf/bin* ]]; then
-  export PATH="${PATH:+${PATH}:}/Users/wscrlhs/.fzf/bin"
+if [[ ! "$PATH" == */Users/abs2free/.fzf/bin* ]]; then
+  export PATH="${PATH:+${PATH}:}/Users/abs2free/.fzf/bin"
 fi
 
 # Auto-completion
 # ---------------
-[[ $- == *i* ]] && source "/Users/wscrlhs/.fzf/shell/completion.zsh" 2> /dev/null
+[[ $- == *i* ]] && source "/Users/abs2free/.fzf/shell/completion.zsh" 2> /dev/null
 
 # Key bindings
 # ------------
-source "/Users/wscrlhs/.fzf/shell/key-bindings.zsh"
+source "/Users/abs2free/.fzf/shell/key-bindings.zsh"
