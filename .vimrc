@@ -740,7 +740,7 @@ endif
 	nnoremap <silent> <C-p>: Files«CR>
 	nnoremap <silent> <C-g> :GFiles<CR>
 	"noremap <silent> <C-o> :Buffers<CR>
-	noremap <C-f> :Rg!
+	"noremap <C-f> :Rg!
 
 
     " Custom statusline

@@ -79,7 +79,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git fast-syntax-highlighting zsh-autosuggestions zsh-interactive-cd
-    golang jump kubectl zsh-syntax-highlighting auto-notify fzf
+    golang jump kubectl auto-notify fzf
     autojump web-search zsh-completions zsh-history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
