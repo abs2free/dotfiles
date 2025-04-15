@@ -7,6 +7,8 @@ let mapleader=","
 " 让配置变更立即生效
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
+set autoread
+
 " 开启实时搜索功能
 set incsearch
 " 高亮显示搜索结果
@@ -131,7 +133,7 @@ filetype plugin on
 " 设置了下面后，可以直接使用y和p
 " set clipboard=unnamed
 " 可视模式下复制到剪贴板
-set clipboard=unnamed,autoselect
+set clipboard=unnamed,unnamedplus " 同时使用两者
 set guioptions+=a
 
 "打开文件时恢复光标位置
@@ -174,7 +176,7 @@ noremap <silent><tab>m :tabnew<cr>
 noremap <silent><tab>e :tabclose<cr>
 noremap <silent><tab>n :tabn<cr>
 noremap <silent><tab>p :tabp<cr>
-noremap <silent><leader>t :tabnew<cr>
+noremap <silent><leader>tt :tabnew<cr>
 noremap <silent><leader>g :tabclose<cr>
 noremap <silent><leader>1 :tabn 1<cr>
 noremap <silent><leader>2 :tabn 2<cr>
@@ -249,6 +251,8 @@ Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug '907th/vim-auto-save'
 Plug 'andrewstuart/vim-kubernetes'
+Plug 'dyng/ctrlsf.vim'
+
 
 " 插件列表结束
 call plug#end()
@@ -348,7 +352,7 @@ endif
 " TagBar 
 "-------------------------------------------------------------------------------
     if isdirectory(expand("~/.vim/plugged/tagbar/"))
-        nnoremap <silent> <leader>tt :TagbarToggle<CR>
+        nnoremap <silent> <leader>t :TagbarToggle<CR>
 
     "autocmd VimEnter * nested :TagbarOpen
     endif
@@ -654,14 +658,15 @@ endif
 "-------------------------------------------------------------------------------
 " fzf
 "-------------------------------------------------------------------------------
-    nnoremap <leader>f :Files<CR>
+    nnoremap <leader>o :Files!<CR>
     nnoremap <silent> <Leader>ag :Ag <CR>
-    nnoremap <leader>rg :Rg <cr>
+    nnoremap <leader>rg :Rg!<CR>
     nnoremap <leader>tg :Tags<CR>
     nnoremap <leader>m :Marks<CR>
     nnoremap <leader>b :Buffers<CR>
     nnoremap <leader>h :History<CR>
     nnoremap <leader>l :Lines<CR>
+    nnoremap <leader>a :CtrlSF -R ""<Left>
 
     " An action can be a reference to a function that processes selected lines
     function! s:build_quickfix_list(lines)
@@ -740,7 +745,7 @@ endif
 	nnoremap <silent> <C-p>: Files«CR>
 	nnoremap <silent> <C-g> :GFiles<CR>
 	"noremap <silent> <C-o> :Buffers<CR>
-	noremap <C-f> :Rg!
+	"noremap <C-f> :Rg!
 
 
     " Custom statusline
@@ -940,6 +945,8 @@ endif
 			let i=i+1
 		endwhile
 	endfunction
+
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
 "-------------------------------------------------------------------------------
 " 防止覆盖,在末尾配置

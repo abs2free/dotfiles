@@ -79,7 +79,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git fast-syntax-highlighting zsh-autosuggestions zsh-interactive-cd
-    golang jump kubectl zsh-syntax-highlighting auto-notify fzf
+    golang jump kubectl auto-notify fzf
     autojump web-search zsh-completions zsh-history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
@@ -114,7 +114,7 @@ alias zte="trans :en"
 alias etz="trans :zh"
 alias got="go mod tidy"
 alias ju="jump"
-alias python="python3"
+#alias python="python3"
 alias viu="vim -u ~/.vim/essential.vim"
 alias phpstan='docker run -v $PWD:/app --rm ghcr.io/phpstan/phpstan'
 alias asciicast2gif='docker run --rm -v $PWD:/data asciinema/asciicast2gif'
@@ -133,7 +133,7 @@ alias k="kubectl"
 alias m="minikube"
 alias ff="ffmpeg -hide_banner"
 alias ms="minikube --memory 8192 --cpus 4 start"
-alias mstart="minikube --nodes 4 --memory 5120 --cpus 3 start"
+alias minikubestart="minikube --nodes 3 --memory 5120 --cpus 3 start"
 alias t="task"
 alias tl='task --list-all'
 alias mk="make"
@@ -254,3 +254,22 @@ export FZF_CTRL_R_OPTS="--preview 'echo {}'"
 #   esac
 # }
 #
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/homebrew/Caskroom/miniconda/base/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
+
+
