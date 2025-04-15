@@ -211,7 +211,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'junegunn/vim-emoji'
 Plug 'majutsushi/tagbar'
-"Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 Plug 'ervandew/supertab'
 Plug 'dstein64/vim-startuptime'
 Plug 'chr4/nginx.vim'
@@ -246,7 +246,7 @@ Plug 'pangloss/vim-javascript'    " JavaScript support
 Plug 'leafgarland/typescript-vim' " TypeScript syntax
 Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
 "Plug 'jparise/vim-graphql'        " GraphQL syntax
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug '907th/vim-auto-save'
 Plug 'andrewstuart/vim-kubernetes'
 
@@ -758,155 +758,218 @@ endif
 "-------------------------------------------------------------------------------
 " coc
 "-------------------------------------------------------------------------------
+"
+"    " Location of the coc-settings.json file
+"    let g:coc_config_home = "~/.config/vem"
+"
+"    let g:coc_global_extensions = [
+"      \ 'coc-snippets',
+"      \ 'coc-pairs',
+"      \ 'coc-tsserver',
+"      \ 'coc-eslint', 
+"      \ 'coc-prettier', 
+"      \ 'coc-json', 
+"      \ 'coc-go',
+"      \ 'coc-html',
+"      \ 'coc-css',
+"      \ 'coc-yaml',
+"      \ 'coc-highlight',
+"      \ ]
+"    " from readme
+"    " if hidden is not set, TextEdit might fail.
+"    set hidden " Some servers have issues with backup files, see #649 set nobackup set nowritebackup " Better display for messages set cmdheight=2 " You will have bad experience for diagnostic messages when it's default 4000.
+"    set updatetime=300
+"
+"    " don't give |ins-completion-menu| messages.
+"    set shortmess+=c
+"
+"    " always show signcolumns
+"    set signcolumn=yes
+"
+"    command! -nargs=0 Prettier :CocCommand prettier.formatFile
+"
+"    " function name(type args) { }
+"    "假設使用如上的語法片段，需要修改 name, type, args 名稱
+"    "語法片段如果有設計好的話，一開始會選取 name ，修改完後
+"    "跳下一個選取 type，然後是 args，預設是 <Ctrl-j> 跳下一個"
+"    "" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+"    let g:coc_snippet_next = '<c-j>'
+"
+"    "" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+"    let g:coc_snippet_prev = '<c-k>'
+"
+"    " Use tab for trigger completion with characters ahead and navigate
+"    " NOTE: There's always complete item selected by default, you may want to enable
+"    " no select by `"suggest.noselect": true` in your configuration file
+"    " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+"    " other plugin before putting this into your config
+"    inoremap <silent><expr> <TAB>
+"          \ coc#pum#visible() ? coc#pum#next(1) :
+"          \ CheckBackspace() ? "\<Tab>" :
+"          \ coc#refresh()
+"    inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+"
+"    " Make <CR> to accept selected completion item or notify coc.nvim to format
+"    " <C-g>u breaks current undo, please make your own choice
+"    inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+"                                  \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+"
+"    function! CheckBackspace() abort
+"      let col = col('.') - 1
+"      return !col || getline('.')[col - 1]  =~# '\s'
+"    endfunction
+"
+"    " Use <c-space> to trigger completion.
+"    inoremap <silent><expr> <c-space> coc#refresh()
+"    " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+"    " Coc only does snippet and additional edit on confirm.
+"    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"    " Or use `complete_info` if your vim support it, like:
+"    "inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+"
+"    " Use `[g` and `]g` to navigate diagnostics
+"    nmap <silent> [g <Plug>(coc-diagnostic-prev)
+"    nmap <silent> ]g <Plug>(coc-diagnostic-next)
+"    " Remap keys for gotos
+"    nmap <silent> gd <Plug>(coc-definition)
+"    nmap <silent> gy <Plug>(coc-type-definition)
+"    nmap <silent> gi <Plug>(coc-implementation)
+"    nmap <silent> gr <Plug>(coc-references)
+"    " Use K to show documentation in preview window
+"    nnoremap <silent> K :call <SID>show_documentation()<CR>
+"    function! s:show_documentation()
+"      if (index(['vim','help'], &filetype) >= 0)
+"        execute 'h '.expand('<cword>')
+"      else
+"        call CocAction('doHover')
+"      endif
+"    endfunction
+"
+"    " Highlight symbol under cursor on CursorHold
+"    autocmd CursorHold * silent call CocActionAsync('highlight')
+"
+"   " " Remap for rename current word
+"    "nmap <F2> <Plug>(coc-rename)
+"    "" Remap for format selected region
+"    "xmap <leader>f  <Plug>(coc-format-selected)
+"    "nmap <leader>f  <Plug>(coc-format-selected)
+"    "augroup mygroup
+"      "autocmd!
+"      "" Setup formatexpr specified filetype(s).
+"      "autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+"      "" Update signature help on jump placeholder
+"      "autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+"    "augroup end
+"
+"    "" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+"    "xmap <leader>a  <Plug>(coc-codeaction-selected)
+"    "nmap <leader>a  <Plug>(coc-codeaction-selected)
+"    "" Remap for do codeAction of current line
+"    "nmap <leader>ac  <Plug>(coc-codeaction)
+"    "" Fix autofix problem of current line
+"    "nmap <leader>qf  <Plug>(coc-fix-current)
+"    "" Create mappings for function text object, requires document symbols feature of languageserver.
+"    "xmap if <Plug>(coc-funcobj-i)
+"    "xmap af <Plug>(coc-funcobj-a)
+"    "omap if <Plug>(coc-funcobj-i)
+"    "omap af <Plug>(coc-funcobj-a)
+"    "" Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+"    ""nmap <silent> <C-d> <Plug>(coc-range-select)
+"    ""xmap <silent> <C-d> <Plug>(coc-range-select)
+"    "" Use `:Format` to format current buffer
+"    "command! -nargs=0 Format :call CocAction('format')
+"
+"    "" Use `:Fold` to fold current buffer
+"    "command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+"
+"    "" use `:OR` for organize import of current buffer
+"    "command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+"
+"    "" Add status line support, for integration with other plugin, checkout `:h coc-status`
+"    set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+"
+"    " Using CocList
+"    " Show all diagnostics
+"    nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+"    " Manage extensions
+"    nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+"    " Show commands
+"    nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+"    " Find symbol of current document
+"    nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+"    " Search workspace symbols
+"    nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+"    " Do default action for next item.
+"    nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+"    " Do default action for previous item.
+"    nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+"    " Resume latest coc list
+"    nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
-    " Location of the coc-settings.json file
-    let g:coc_config_home = "~/.config/vem"
 
-    let g:coc_global_extensions = [
-      \ 'coc-snippets',
-      \ 'coc-pairs',
-      \ 'coc-tsserver',
-      \ 'coc-eslint', 
-      \ 'coc-prettier', 
-      \ 'coc-json', 
-      \ 'coc-go',
-      \ 'coc-html',
-      \ 'coc-css',
-      \ 'coc-yaml',
-      \ 'coc-highlight',
-      \ ]
-    " from readme
-    " if hidden is not set, TextEdit might fail.
-    set hidden " Some servers have issues with backup files, see #649 set nobackup set nowritebackup " Better display for messages set cmdheight=2 " You will have bad experience for diagnostic messages when it's default 4000.
-    set updatetime=300
+"-------------------------------------------------------------------------------
+" YouCompleteMe 
+"-------------------------------------------------------------------------------
+if isdirectory(expand("~/.vim/plugged/YouCompleteMe/"))
+    if OSX()
+        let g:acp_enableAtStartup = 0
 
-    " don't give |ins-completion-menu| messages.
-    set shortmess+=c
+        " enable completion from tags
+        let g:ycm_collect_identifiers_from_tags_files = 1
 
-    " always show signcolumns
-    set signcolumn=yes
+        " remap Ultisnips for compatibility for YCM
+        let g:UltiSnipsExpandTrigger = '<C-j>'
+        let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+        let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+        let g:ycm_key_invoke_completion = '<c-z>'
 
-    command! -nargs=0 Prettier :CocCommand prettier.formatFile
+        " Enable omni completion.
+        autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+        autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+        autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+        autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+        autocmd FileType javascript nmap <buffer> <C-]> :YcmCompleter GoTo<CR>
 
-    " function name(type args) { }
-    "假設使用如上的語法片段，需要修改 name, type, args 名稱
-    "語法片段如果有設計好的話，一開始會選取 name ，修改完後
-    "跳下一個選取 type，然後是 args，預設是 <Ctrl-j> 跳下一個"
-    "" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-    let g:coc_snippet_next = '<c-j>'
+       " 颜色配置
+       "highlight Pmenu ctermfg=12 ctermbg=0 guifg=#ffffff guibg=#000000
+       "highlight PMenuSel ctermfg=242 ctermbg=8 guifg=darkgrey guibg=black
+       "highlight Conceal guifg=White guibg=Red
+       " 由于YCM的警告语句在黑色终端下配色很模糊，修改成较为高亮的蓝底黑字
+       "highlight link YcmWarningSection Pmenu
 
-    "" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-    let g:coc_snippet_prev = '<c-k>'
+        " Haskell post write lint and check with ghcmod
+        " $ `cabal install ghcmod` if missing and ensure
+        " ~/.cabal/bin is in your $PATH.
+        if !executable("ghcmod")
+            autocmd BufWritePost *.hs GhcModCheckAndLintAsync
+        endif
 
-    " Use tab for trigger completion with characters ahead and navigate
-    " NOTE: There's always complete item selected by default, you may want to enable
-    " no select by `"suggest.noselect": true` in your configuration file
-    " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-    " other plugin before putting this into your config
-    inoremap <silent><expr> <TAB>
-          \ coc#pum#visible() ? coc#pum#next(1) :
-          \ CheckBackspace() ? "\<Tab>" :
-          \ coc#refresh()
-    inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+        " For snippet_complete marker.
+        if !exists("g:spf13_no_conceal")
+            if has('conceal')
+                set conceallevel=2 concealcursor=i
+            endif
+        endif
 
-    " Make <CR> to accept selected completion item or notify coc.nvim to format
-    " <C-g>u breaks current undo, please make your own choice
-    inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                                  \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+        " Disable the neosnippet preview candidate window
+        " When enabled, there can be too much visual noise
+        " especially when splits are used.
+        set completeopt-=preview
 
-    function! CheckBackspace() abort
-      let col = col('.') - 1
-      return !col || getline('.')[col - 1]  =~# '\s'
-    endfunction
-
-    " Use <c-space> to trigger completion.
-    inoremap <silent><expr> <c-space> coc#refresh()
-    " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-    " Coc only does snippet and additional edit on confirm.
-    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-    " Or use `complete_info` if your vim support it, like:
-    "inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-
-    " Use `[g` and `]g` to navigate diagnostics
-    nmap <silent> [g <Plug>(coc-diagnostic-prev)
-    nmap <silent> ]g <Plug>(coc-diagnostic-next)
-    " Remap keys for gotos
-    nmap <silent> gd <Plug>(coc-definition)
-    nmap <silent> gy <Plug>(coc-type-definition)
-    nmap <silent> gi <Plug>(coc-implementation)
-    nmap <silent> gr <Plug>(coc-references)
-    " Use K to show documentation in preview window
-    nnoremap <silent> K :call <SID>show_documentation()<CR>
-    function! s:show_documentation()
-      if (index(['vim','help'], &filetype) >= 0)
-        execute 'h '.expand('<cword>')
-      else
-        call CocAction('doHover')
-      endif
-    endfunction
-
-    " Highlight symbol under cursor on CursorHold
-    autocmd CursorHold * silent call CocActionAsync('highlight')
-
-   " " Remap for rename current word
-    "nmap <F2> <Plug>(coc-rename)
-    "" Remap for format selected region
-    "xmap <leader>f  <Plug>(coc-format-selected)
-    "nmap <leader>f  <Plug>(coc-format-selected)
-    "augroup mygroup
-      "autocmd!
-      "" Setup formatexpr specified filetype(s).
-      "autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-      "" Update signature help on jump placeholder
-      "autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-    "augroup end
-
-    "" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-    "xmap <leader>a  <Plug>(coc-codeaction-selected)
-    "nmap <leader>a  <Plug>(coc-codeaction-selected)
-    "" Remap for do codeAction of current line
-    "nmap <leader>ac  <Plug>(coc-codeaction)
-    "" Fix autofix problem of current line
-    "nmap <leader>qf  <Plug>(coc-fix-current)
-    "" Create mappings for function text object, requires document symbols feature of languageserver.
-    "xmap if <Plug>(coc-funcobj-i)
-    "xmap af <Plug>(coc-funcobj-a)
-    "omap if <Plug>(coc-funcobj-i)
-    "omap af <Plug>(coc-funcobj-a)
-    "" Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-    ""nmap <silent> <C-d> <Plug>(coc-range-select)
-    ""xmap <silent> <C-d> <Plug>(coc-range-select)
-    "" Use `:Format` to format current buffer
-    "command! -nargs=0 Format :call CocAction('format')
-
-    "" Use `:Fold` to fold current buffer
-    "command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-    "" use `:OR` for organize import of current buffer
-    "command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-    "" Add status line support, for integration with other plugin, checkout `:h coc-status`
-    set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-    " Using CocList
-    " Show all diagnostics
-    nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-    " Manage extensions
-    nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-    " Show commands
-    nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-    " Find symbol of current document
-    nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-    " Search workspace symbols
-    nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-    " Do default action for next item.
-    nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-    " Do default action for previous item.
-    nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-    " Resume latest coc list
-    nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
-
+        " lsp-service
+        let s:lsp = '/Users/wscrlhs/work/github/lsp-examples'
+        let g:ycm_language_server = [
+            \   {
+            \     'name': 'php',
+            \     'cmdline': [ 'php', expand( s:lsp . '/php/vendor/bin/php-language-server.php' ) ],
+            \     'filetypes': [ 'php' ],
+            \     'lua': ['.', ':'],
+            \   },
+            \ ]
+    endif
+endif
+ 
 "-------------------------------------------------------------------------------
 " autosave
 "-------------------------------------------------------------------------------
