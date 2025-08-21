@@ -52,7 +52,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+#ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -78,8 +78,8 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fast-syntax-highlighting zsh-autosuggestions zsh-interactive-cd
-    golang jump kubectl auto-notify fzf
+plugins=(git fast-syntax-highlighting zsh-autosuggestions zsh-interactive-cd conda
+    golang jump kubectl auto-notify fzf history
     autojump web-search zsh-completions zsh-history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
@@ -133,7 +133,7 @@ alias k="kubectl"
 alias m="minikube"
 alias ff="ffmpeg -hide_banner"
 alias ms="minikube --memory 8192 --cpus 4 start"
-alias minikubestart="minikube --nodes 3 --memory 5120 --cpus 3 start"
+alias mkstart="minikube --nodes 3 --memory 2048 --cpus 2 start"
 alias t="task"
 alias tl='task --list-all'
 alias mk="make"
@@ -269,3 +269,23 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+# 添加到 ~/.zshrc 或 ~/.bashrc
+alias kubeconform-kustomize='kubeconform -schema-location "default" -schema-location "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/api/konfig/builtinpluginconsts/schema.json"'
+
+eval "$(task --completion zsh)"
+
+
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
+
+. /opt/homebrew/etc/profile.d/z.sh
