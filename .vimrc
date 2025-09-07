@@ -927,6 +927,10 @@ endif
 	au FileType yaml nmap <leader>kdd :KubeDeleteDir<CR>
 
 
+
+	" Create markmap from the whole file
+	nmap <Leader>m <Plug>(coc-markmap-create)
+
 "-------------------------------------------------------------------------------
 " 自定义函数
 "-------------------------------------------------------------------------------
