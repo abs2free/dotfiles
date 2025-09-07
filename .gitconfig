@@ -1,10 +1,10 @@
 [user]
-	email = wscrlhs@gmail.com
-	name = wscrlhs
+	email = abs2free@gmail.com
+	name = abs2free
 [url "git@code.aliyun.com:"]
 	insteadOf = https://code.aliyun.com/
 [core]
-	excludesfile = /Users/wscrlhs/.gitignore_global
+	excludesfile = /Users/abs2free/.gitignore_global
     pager = delta
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
